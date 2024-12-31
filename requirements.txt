@@ -1,0 +1,6 @@
+pillow
+scikit-learn
+torchvision
+numpy
+torch
+
