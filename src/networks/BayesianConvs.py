@@ -114,6 +114,8 @@ class BayesianConv2D(_ConvNd):
         if self.training or sample:
             weight = self.weight.sample()
             bias = self.bias.sample() if self.use_bias else None
+            self.sampled_weight = weight
+            self.sampled_bias = bias
                 
         else:
             weight = self.weight.mu

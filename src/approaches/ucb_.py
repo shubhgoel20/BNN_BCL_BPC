@@ -147,7 +147,7 @@ class Appr(object):
             shared_model_task_cache["modules_names_without_cls"] = modules_names
         return modules_names
 
-    def logs(self,task_num,input_):
+    def logs(self,task_num):
         lp_, lvp = 0.0, 0.0
         for name in self.modules_names_without_cls:
             n = name.split('.')
@@ -158,11 +158,10 @@ class Appr(object):
             elif len(n) == 4:
                 m = self.model._modules[n[0]]._modules[n[1]]._modules[n[2]]._modules[n[3]]
             
-            lp_ = m.log_prior
+            lp_ += m.log_prior
             lvp += m.log_variational_posterior
 
-        input_shaped_tensor = input_
-        lp__, last_model_available = get_log_posterior_from_last_task(input_shaped_tensor, self.model)
+        lp__, last_model_available = get_log_posterior_from_last_task(self.model)
         lp = lp__ if last_model_available else lp_
         lp += self.model.classifier[task_num].log_prior
         lvp += self.model.classifier[task_num].log_variational_posterior
@@ -235,8 +234,8 @@ class Appr(object):
         if sample:
             lps, lvps, predictions = [], [], []
             for i in range(self.samples):
-                predictions.append(self.model(input,sample=sample)[task_num])
-                lp, lv = self.logs(task_num, input)
+                predictions.append(self.model(input, sample=sample)[task_num])
+                lp, lv = self.logs(task_num)
                 lps.append(lp)
                 lvps.append(lv)
 

@@ -95,6 +95,8 @@ class _BatchNorm(nn.Module):
         if self.training or sample:
             weight = self.weight.sample()
             bias = self.bias.sample()
+            self.sampled_weight = weight
+            self.sampled_bias = bias
         else:
             weight = self.weight.mu
             bias = self.bias.mu

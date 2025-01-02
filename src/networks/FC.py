@@ -67,7 +67,8 @@ class BayesianLinear(nn.Module):
         if self.training or sample:
             weight = self.weight.sample()
             bias = self.bias.sample() if self.use_bias else None
-            
+            self.sampled_weight = weight
+            self.sampled_bias = bias
         else:
             weight = self.weight.mu
             bias = self.bias.mu if self.use_bias else None
@@ -79,9 +80,8 @@ class BayesianLinear(nn.Module):
             else:
                 self.log_prior = self.weight_prior.log_prob(weight)
                 self.log_variational_posterior = self.weight.log_prob(weight)
-            
         else:
             self.log_prior, self.log_variational_posterior = 0, 0
-        
+
         return F.linear(input, weight, bias)
 
