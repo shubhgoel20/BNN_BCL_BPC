@@ -243,11 +243,6 @@ class Appr(object):
 
         return total_loss/total_num, total_acc/total_num
 
-
-    def set_model_(model, state_dict):
-        model.model.load_state_dict(copy.deepcopy(state_dict))
-
-
     def elbo_loss(self, input, target, task_num, num_batches, sample, debug=False):
         if sample:
             lps, lvps, predictions = [], [], []

@@ -7,8 +7,7 @@ shared_model_task_cache = {
 def get_log_posterior_from_last_task(input_shaped_tensor, modules_names_without_cls):
     last_task = shared_model_task_cache["last_task"]
     lvp = 0.0
-    if last_task:
-        print(f"Last task: {last_task}")
+    if last_task is not None:
         last_model = shared_model_task_cache["models"][shared_model_task_cache["last_task"]]
         last_model(input_shaped_tensor, sample=False, calculate_log_probs=True)
         for name in modules_names_without_cls:
@@ -31,9 +30,9 @@ def update_last_task(current_task):
         from networks import resnet_ucb as network
 
     shared_model_task_cache["last_task"] = shared_model_task_cache["current_task"]
-    if shared_model_task_cache["last_task"]:
+    if shared_model_task_cache["last_task"] is not None:
         model_ = network.Net(args).to(args.device) 
-        model_.model.load_state_dict(shared_model_task_cache["models"][shared_model_task_cache["last_task"]])
+        model_.load_state_dict(shared_model_task_cache["models"][shared_model_task_cache["last_task"]])
         model_.eval()
         shared_model_task_cache["models"][shared_model_task_cache["last_task"]] = model_
     shared_model_task_cache["current_task"] = current_task
