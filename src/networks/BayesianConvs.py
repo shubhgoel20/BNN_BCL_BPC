@@ -6,7 +6,6 @@ from torch.nn.modules.utils import _pair
 from .distributions import VariationalPosterior, Prior
 
 
-
 class _ConvNd(nn.Module):
 
     def __init__(self, in_channels, out_channels, kernel_size, stride, padding, dilation, transposed, output_padding, groups, use_bias, args):

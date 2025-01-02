@@ -25,7 +25,7 @@ parser.add_argument('--lr',                 default=0.01,           type=float, 
 parser.add_argument('--nlayers',            default=1,              type=int,   help='')
 parser.add_argument('--nhid',               default=1200,           type=int, help='')
 parser.add_argument('--parameter',          default='',             type=str,   help='')
-parser.add_argument('--rbuff_size',          default=0.1,             type=float,   help='')
+parser.add_argument('--rbuff_size',         default=0.05,           type=float,   help='')
 
 # UCB HYPER-PARAMETERS
 parser.add_argument('--samples',            default='10',           type=int,     help='Number of Monte Carlo samples')

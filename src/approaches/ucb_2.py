@@ -11,7 +11,7 @@ import random
 
 class Appr(object):
 
-    def __init__(self,model,args,lr_min=1e-6,lr_factor=3,lr_patience=5,clipgrad=1000, shuffle_rbuff=True):
+    def __init__(self,model,args,lr_min=1e-6,lr_factor=3,lr_patience=5,clipgrad=1000):
         print("UCB New2")
         self.model=model
         self.device = args.device
@@ -41,7 +41,6 @@ class Appr(object):
         self.prev_task_data = self.shared_model_cache["prev_task_data"]
         self.task_freq = self.shared_model_cache["task_frquencies"]
         self.replay_buffer_perc = args.rbuff_size
-        self.shuffle_rbuff = shuffle_rbuff
 
     def get_prob_from_freq(self):
         # probs = {key:1/value for key,value in self.task_freq.items()}
@@ -69,7 +68,6 @@ class Appr(object):
     def train(self,task_num,xtrain,ytrain,xvalid,yvalid):
 
         # Update the next learning rate for each parameter based on their uncertainty
-        # params_dict = self.update_lr(task_num)
         update_last_task(task_num)
         params_dict = self.get_model_params()
         self.optimizer = BayesianSGD(params=params_dict)
@@ -81,40 +79,21 @@ class Appr(object):
         lr = self.init_lr
         patience = self.lr_patience
 
-        #Compute probs from frequencies
-        #sample task
-        #fill buffer with images of that task (Bayesian Coreset Integration)
-
-
-
         # Loop epochs
-        print(len(self.prev_task_data.keys()))
         try:
             for e in range(self.nepochs):
-                # Train
                 if(len(self.prev_task_data.keys()) > 0):
                     probs = self.get_prob_from_freq()
                     sampled_task = self.sample_prev_task(probs)
                     self.task_freq[sampled_task]+=1
                     prev_xtrain, prev_ytrain = self.get_buffer(sampled_task, int(self.replay_buffer_perc*xtrain.shape[0]))
-
-                    print(xtrain.shape)
-                    print(ytrain.shape)
-                    print(prev_xtrain.shape)
-                    print(prev_ytrain.shape)
-
-                    xtrain = torch.cat((xtrain,prev_xtrain), dim=0)
-                    ytrain = torch.cat((ytrain,prev_ytrain), dim=0)
-                    print(xtrain.shape)
-                    print(ytrain.shape)
-                    if self.shuffle_rbuff:
-                        indices = np.arange(xtrain.shape[0])
-                        indices = np.random.shuffle(indices)
-                        xtrain = xtrain[indices]
-                        ytrain = ytrain[indices]
-
+                    self.sampled_task = sampled_task
+                    # xtrain = torch.cat((xtrain,prev_xtrain), dim=0)
+                    # ytrain = torch.cat((ytrain,prev_ytrain), dim=0)
+                else:
+                    prev_xtrain, prev_ytrain = None, None
                 clock0=time.time()
-                self.train_epoch(task_num,xtrain,ytrain)
+                self.train_epoch(task_num, xtrain, ytrain, prev_xtrain, prev_ytrain)
                 clock1=time.time()
                 train_loss,train_acc=self.eval(task_num,xtrain,ytrain)
                 clock2=time.time()
@@ -122,7 +101,6 @@ class Appr(object):
                 print('| Epoch {:3d}, time={:5.1f}ms/{:5.1f}ms | Train: loss={:.3f}, acc={:5.1f}% |'.format(e+1,
                     1000*self.sbatch*(clock1-clock0)/xtrain.size(0),1000*self.sbatch*(clock2-clock1)/xtrain.size(0),
                     train_loss,100*train_acc),end='')
-                # Valid
                 valid_loss,valid_acc=self.eval(task_num,xvalid,yvalid)
                 print(' Valid: loss={:.3f}, acc={:5.1f}% |'.format(valid_loss, 100 * valid_acc), end='')
 
@@ -152,11 +130,6 @@ class Appr(object):
                 print()
         except KeyboardInterrupt:
             print()
-
-        # Restore best
-        # nepochs = 10
-        #[12,10,10, 1]
-        #[23,16,10,]
         self.task_freq[task_num] = int(1/self.replay_buffer_perc)
 
         self.model.load_state_dict(copy.deepcopy(best_model))
@@ -228,7 +201,12 @@ class Appr(object):
         return lp, lvp
 
 
-    def train_epoch(self,task_num,x,y):
+    def train_epoch(self, task_num, x, y, prevx = None, prevy = None):
+        self.train_epoch_(task_num, x, y)
+        if prevx is not None and prevy is not None:
+            self.train_epoch_(self.sampled_task, prevx, prevy)
+
+    def train_epoch_(self,task_num, x, y):
 
         self.model.train()
 
@@ -237,7 +215,6 @@ class Appr(object):
         r=torch.LongTensor(r).to(self.device)
 
         num_batches = len(x)//self.sbatch
-        j=0
         # Loop batches
         for i in range(0,len(r),self.sbatch):
 

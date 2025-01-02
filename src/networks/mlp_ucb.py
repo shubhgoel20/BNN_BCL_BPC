@@ -36,8 +36,8 @@ class BayesianMLP(torch.nn.Module):
     def forward(self, x, sample=False, calculate_log_probs=False):
         x = x.view(x.size(0),-1)
         x = torch.nn.functional.relu(self.fc1(x, sample, calculate_log_probs=calculate_log_probs))
-        y=[]
-        for t,i in self.taskcla:
+        y = []
+        for t, i in self.taskcla:
             y.append(self.classifier[t](x, sample, calculate_log_probs=calculate_log_probs))
         return [torch.nn.functional.log_softmax(yy, dim=1) for yy in y]
 
