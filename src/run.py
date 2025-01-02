@@ -3,6 +3,7 @@ import numpy as np
 import torch
 import utils
 from datetime import datetime
+from approaches.common import shared_model_task_cache
 
 tstart=time.time()
 
@@ -91,6 +92,7 @@ print('Input size =',inputsize,'\nTask info =',taskcla)
 args.num_tasks=len(taskcla)
 args.inputsize, args.taskcla = inputsize, taskcla
 
+shared_model_task_cache["args"] = args
 # Inits
 print('Inits...')
 model=network.Net(args).to(args.device)
