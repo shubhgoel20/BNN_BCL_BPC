@@ -70,7 +70,7 @@ elif args.experiment=='mixture':
 
 # Args -- Approach
 if args.approach=='ucb':
-    from approaches import ucb as approach
+    from approaches import ucb_ as approach
 
 # Args -- Network
 if args.experiment=='mnist2' or args.experiment=='pmnist' or args.experiment == 'mnist5':
