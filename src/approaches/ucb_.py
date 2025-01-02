@@ -76,10 +76,9 @@ class Appr(object):
                     print("saved best model and quit because loss became nan")
                     break
 
-                # Adapt lr
-                if valid_loss<best_loss:
-                    best_loss=valid_loss
-                    best_model=copy.deepcopy(self.model.state_dict())
+                if valid_loss < best_loss:
+                    best_loss = valid_loss
+                    best_model = copy.deepcopy(self.model.state_dict())
                     self.shared_model_cache["models"][task_num] = copy.deepcopy(self.model.state_dict())
                     patience=self.lr_patience
                     print(' *',end='')
@@ -93,7 +92,7 @@ class Appr(object):
                             break
                         patience=self.lr_patience
 
-                        params_dict = self.update_lr(task_num, adaptive_lr=True, lr=lr)
+                        params_dict = self.update_lr(task_num, lr=lr)
                         self.optimizer=BayesianSGD(params=params_dict)
 
                 print()
@@ -111,7 +110,7 @@ class Appr(object):
         params_dict.append({'params': self.model.parameters(), 'lr': self.init_lr})
         return params_dict
 
-    def update_lr(self,task_num, lr=None, adaptive_lr=False):
+    def update_lr(self,task_num, lr=None):
         params_dict = []
         if task_num==0:
             params_dict.append({'params': self.model.parameters(), 'lr': self.init_lr})
@@ -125,21 +124,9 @@ class Appr(object):
                 elif len(n) == 4:
                     m = self.model._modules[n[0]]._modules[n[1]]._modules[n[2]]._modules[n[3]]
                 else:
-                    print (name)
-
-                if adaptive_lr is True:
-                    params_dict.append({'params': m.weight_rho, 'lr': lr})
-                    params_dict.append({'params': m.bias_rho, 'lr': lr})
-
-                else:
-                    # Will not be called
-                    w_unc = torch.log1p(torch.exp(m.weight_rho.data))
-                    b_unc = torch.log1p(torch.exp(m.bias_rho.data))
-
-                    params_dict.append({'params': m.weight_mu, 'lr': torch.mul(w_unc,self.init_lr)})
-                    params_dict.append({'params': m.bias_mu, 'lr': torch.mul(b_unc,self.init_lr)})
-                    params_dict.append({'params': m.weight_rho, 'lr':self.init_lr})
-                    params_dict.append({'params': m.bias_rho, 'lr':self.init_lr})
+                    print(name)
+                params_dict.append({'params': m.weight_rho, 'lr': lr})
+                params_dict.append({'params': m.bias_rho, 'lr': lr})
 
         return params_dict
 
@@ -156,7 +143,8 @@ class Appr(object):
                 modules_names.append('.'.join(n))
 
         modules_names = set(modules_names)
-
+        if not with_classifier:
+            shared_model_task_cache["modules_names_without_cls"] = modules_names
         return modules_names
 
     def logs(self,task_num,input_):
@@ -174,7 +162,7 @@ class Appr(object):
             lvp += m.log_variational_posterior
 
         input_shaped_tensor = input_
-        lp__, last_model_available = get_log_posterior_from_last_task(input_shaped_tensor, self.modules_names_without_cls)
+        lp__, last_model_available = get_log_posterior_from_last_task(input_shaped_tensor, self.model)
         lp = lp__ if last_model_available else lp_
         lp += self.model.classifier[task_num].log_prior
         lvp += self.model.classifier[task_num].log_variational_posterior

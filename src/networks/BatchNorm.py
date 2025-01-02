@@ -79,6 +79,9 @@ class _BatchNorm(nn.Module):
     def _check_input_dim(self, input):
         return NotImplemented
 
+    def calculate_logs_on_external_weight_and_bias(self, weight, bias):
+        return 0, 0
+
 
     def forward(self, input, sample=False, calculate_log_probs=False):
         self._check_input_dim(input)

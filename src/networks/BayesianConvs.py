@@ -95,6 +95,15 @@ class BayesianConv2D(_ConvNd):
         # self.pruned_weight_rho=self.weight_rho.data.mul_(mask)
         # pruning_mask = torch.eq(mask, torch.zeros_like(mask))
 
+    def calculate_logs_on_external_weight_and_bias(self, weight, bias):
+        if self.use_bias:
+            log_prior = self.weight_prior.log_prob(weight) + self.bias_prior.log_prob(bias)
+            log_variational_posterior = self.weight.log_prob(weight) + self.bias.log_prob(bias)
+        else:
+            log_prior = self.weight_prior.log_prob(weight)
+            log_variational_posterior = self.weight.log_prob(weight)
+        return log_prior, log_variational_posterior
+
 
     def forward(self, input, sample=False, calculate_log_probs=False):
         if self.mask_flag:

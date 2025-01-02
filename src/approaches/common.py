@@ -4,13 +4,13 @@ shared_model_task_cache = {
     "models": {},
 }
 
-def get_log_posterior_from_last_task(input_shaped_tensor, modules_names_without_cls):
+def get_log_posterior_from_last_task(input_shaped_tensor, active_model):
     last_task = shared_model_task_cache["last_task"]
     lvp = 0.0
     if last_task is not None:
         last_model = shared_model_task_cache["models"][shared_model_task_cache["last_task"]]
-        last_model(input_shaped_tensor, sample=False, calculate_log_probs=True)
-        for name in modules_names_without_cls:
+        last_model(input_shaped_tensor, sample=False)
+        for name in shared_model_task_cache["modules_names_without_cls"]:
             n = name.split('.')
             if len(n) == 1:
                 m = last_model._modules[n[0]]
@@ -18,7 +18,10 @@ def get_log_posterior_from_last_task(input_shaped_tensor, modules_names_without_
                 m = last_model._modules[n[0]]._modules[n[1]]._modules[n[2]]
             elif len(n) == 4:
                 m = last_model._modules[n[0]]._modules[n[1]]._modules[n[2]]._modules[n[3]]
-            lvp += m.log_variational_posterior
+            weight = active_model.state_dict()[f"{name}.weight_mu"]
+            bias = active_model.state_dict()[f"{name}.bias_mu"]
+            lp_, lvp_ = m.calculate_logs_on_external_weight_and_bias(weight, bias)
+            lvp += lvp_
         return lvp, True
     return 0, False
 
