@@ -2,6 +2,8 @@ shared_model_task_cache = {
     "last_task": None,
     "current_task": None,
     "models": {},
+    "task_frquencies": {},
+    "prev_task_data" : {}
 }
 
 def get_log_posterior_from_last_task(active_model):

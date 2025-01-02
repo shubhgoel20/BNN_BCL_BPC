@@ -25,6 +25,7 @@ parser.add_argument('--lr',                 default=0.01,           type=float, 
 parser.add_argument('--nlayers',            default=1,              type=int,   help='')
 parser.add_argument('--nhid',               default=1200,           type=int, help='')
 parser.add_argument('--parameter',          default='',             type=str,   help='')
+parser.add_argument('--rbuff_size',          default=0.1,             type=float,   help='')
 
 # UCB HYPER-PARAMETERS
 parser.add_argument('--samples',            default='10',           type=int,     help='Number of Monte Carlo samples')
@@ -71,7 +72,7 @@ elif args.experiment=='mixture':
 
 # Args -- Approach
 if args.approach=='ucb':
-    from approaches import ucb_ as approach
+    from approaches import ucb_2 as approach
 
 # Args -- Network
 if args.experiment=='mnist2' or args.experiment=='pmnist' or args.experiment == 'mnist5':
@@ -116,6 +117,7 @@ else:
 # Loop tasks
 acc=np.zeros((len(taskcla),len(taskcla)),dtype=np.float32)
 lss=np.zeros((len(taskcla),len(taskcla)),dtype=np.float32)
+
 for t,ncla in taskcla[args.sti:]:
     print('*'*100)
     print('Task {:2d} ({:s})'.format(t,data[t]['name']))
@@ -149,6 +151,7 @@ for t,ncla in taskcla[args.sti:]:
 
     # Train
     appr.train(task,xtrain,ytrain,xvalid,yvalid)
+    shared_model_task_cache["prev_task_data"][t] = {"xtrain":xtrain, "ytrain":ytrain, "xvalid":xvalid, "yvalid": yvalid, "ncla": ncla}
     print('-'*100)
 
     # Test
