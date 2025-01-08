@@ -3,7 +3,8 @@ shared_model_task_cache = {
     "current_task": None,
     "models": {},
     "task_frquencies": {},
-    "prev_task_data" : {}
+    "prev_task_data" : {},
+    "coresets": {}
 }
 
 def get_log_posterior_from_last_task(active_model):
@@ -29,16 +30,19 @@ def get_log_posterior_from_last_task(active_model):
         return lvp, True
     return 0, False
 
-def update_last_task(current_task):
+def load_network_with_args():
     args = shared_model_task_cache["args"]
     if args.experiment=='mnist2' or args.experiment=='pmnist' or args.experiment == 'mnist5':
         from networks import mlp_ucb as network
     else:
         from networks import resnet_ucb as network
+    return network.Net(args).to(args.device)
 
+def update_last_task(current_task):
+    network = load_network_with_args()
     shared_model_task_cache["last_task"] = shared_model_task_cache["current_task"]
     if shared_model_task_cache["last_task"] is not None:
-        model_ = network.Net(args).to(args.device) 
+        model_ = network 
         model_.load_state_dict(shared_model_task_cache["models"][shared_model_task_cache["last_task"]])
         model_.eval()
         shared_model_task_cache["models"][shared_model_task_cache["last_task"]] = model_
