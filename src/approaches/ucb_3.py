@@ -12,7 +12,7 @@ from torch.distributions import Normal
 class Appr(object):
 
     def __init__(self,model,args,lr_min=1e-6,lr_factor=3,lr_patience=5,clipgrad=1000):
-        print("UCB New2")
+        print("UCB New3")
         self.model=model
         self.device = args.device
         self.lr_min=lr_min
@@ -58,33 +58,36 @@ class Appr(object):
             elif len(n) == 4:
                 model2_ = model2._modules[n[0]]._modules[n[1]]._modules[n[2]]._modules[n[3]]
                 model1_ = model1._modules[n[0]]._modules[n[1]]._modules[n[2]]._modules[n[3]]
-            model1_weight_dist = Normal(model1_.weight_mu, model1_.weight_rho)
-            model2_weight_dist = Normal(model2_.weight_mu, model2_.weight_rho)
+            model1_weight_dist = Normal(model1_.weight.mu, model1_.weight.sigma)
+            model2_weight_dist = Normal(model2_.weight.mu, model2_.weight.sigma)
             kl_div += torch.distributions.kl.kl_divergence(model1_weight_dist, model2_weight_dist).sum()
             if model1_.use_bias and model2_.use_bias:
-                model1_bias_dist = Normal(model1_.bias_mu, model1_.bias_rho)
-                model2_bias_dist = Normal(model2_.bias_mu, model2_.bias_rho)
+                model1_bias_dist = Normal(model1_.bias.mu, model1_.bias.sigma)
+                model2_bias_dist = Normal(model2_.bias.mu, model2_.bias.sigma)
                 kl_div += torch.distributions.kl.kl_divergence(model1_bias_dist, model2_bias_dist).sum()
         
         # Classifier KL Divergence
-        model1_weight_dist = Normal(model1.classifier[task_num].weight_mu, model1.classifier[task_num].weight_rho)
-        model2_weight_dist = Normal(model2.classifier[task_num].weight_mu, model2.classifier[task_num].weight_rho)
+        model1_weight_dist = Normal(model1.classifier[task_num].weight.mu, model1.classifier[task_num].weight.sigma)
+        model2_weight_dist = Normal(model2.classifier[task_num].weight.mu, model2.classifier[task_num].weight.sigma)
         kl_div += torch.distributions.kl.kl_divergence(model1_weight_dist, model2_weight_dist).sum()
         if model1_.use_bias and model2_.use_bias:
-            model1_bias_dist = Normal(model1.classifier[task_num].bias_mu, model1.classifier[task_num].bias_rho)
-            model2_bias_dist = Normal(model2.classifier[task_num].bias_mu, model2.classifier[task_num].bias_rho)
+            model1_bias_dist = Normal(model1.classifier[task_num].bias.mu, model1.classifier[task_num].bias.sigma)
+            model2_bias_dist = Normal(model2.classifier[task_num].bias.mu, model2.classifier[task_num].bias.sigma)
             kl_div += torch.distributions.kl.kl_divergence(model1_bias_dist, model2_bias_dist).sum()
         return kl_div
 
-    def generate_coreset(self, task_X, task_y):
+    def generate_coreset(self, task_X_, task_y_):
         coreset_size = shared_model_task_cache["args"].coreset_size
         last_model = shared_model_task_cache["last_task"]
         state_dict = self.model_with_gmm_prior_dict if last_model is None else copy.deepcopy(shared_model_task_cache["models"][last_model].state_dict())
-
+        n_ = task_X_.shape[0]
+        indices = np.random.choice(n_, int(self.replay_buffer_perc*n_), replace=False)
+        task_X = task_X_[indices]
+        task_y = task_y_[indices]        
         remaining_indices = list(range(len(task_X)))
         coreset_indices = []
 
-        for _ in len(coreset_size):
+        for _ in range(coreset_size):
             best_idx = None
             best_loss = np.inf
 
@@ -92,14 +95,17 @@ class Appr(object):
                 candidate_indices = coreset_indices + [idx]
                 X_subset = task_X[candidate_indices]
                 y_subset = task_y[candidate_indices]
-                model = load_network_with_args().load_state_dict(state_dict)
+                model = load_network_with_args()
+                model.load_state_dict(copy.deepcopy(state_dict))
                 stub_model_trained = self.train_stub(model, X_subset, y_subset)
                 kl_div = self.get_kl_divergence(stub_model_trained, self.model)
                 if kl_div < best_loss:
                     best_loss = kl_div
                     best_idx = idx
+                    print(f"Possible coreset entry found: {best_idx} : {best_loss}")
             coreset_indices.append(best_idx)
             remaining_indices.remove(best_idx)
+            print(f"Coreset entry added: {best_idx} : {best_loss}")
         self.coresets[self.current_task] = (task_X[coreset_indices], task_y[coreset_indices])
         
     def train_stub(self, model, xtrain, ytrain):
@@ -246,7 +252,7 @@ class Appr(object):
 
     def train_epoch(self, task_num, x, y):
         self.train_epoch_(task_num, x, y)
-        if len(self.coreset.keys()) > 0:
+        if len(self.coresets.keys()) > 0:
             for k, v in self.coresets.items():
                 self.train_epoch_(k, v[0], v[1])
 

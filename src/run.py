@@ -26,6 +26,7 @@ parser.add_argument('--nlayers',            default=1,              type=int,   
 parser.add_argument('--nhid',               default=1200,           type=int, help='')
 parser.add_argument('--parameter',          default='',             type=str,   help='')
 parser.add_argument('--rbuff_size',         default=0.05,           type=float,   help='')
+parser.add_argument('--coreset_size',       default=5,              type=int,   help='')
 
 # UCB HYPER-PARAMETERS
 parser.add_argument('--samples',            default='10',           type=int,     help='Number of Monte Carlo samples')
@@ -72,7 +73,7 @@ elif args.experiment=='mixture':
 
 # Args -- Approach
 if args.approach=='ucb':
-    from approaches import ucb_2 as approach
+    from approaches import ucb_3 as approach
 
 # Args -- Network
 if args.experiment=='mnist2' or args.experiment=='pmnist' or args.experiment == 'mnist5':
