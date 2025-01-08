@@ -1,0 +1,103 @@
+====================================================================================================
+Arguments =
+	seed: 0
+	device: cuda:0
+	experiment: mnist2
+	approach: ucb
+	data_path: ../data/
+	output: 
+	checkpoint_dir: ../checkpoints/
+	nepochs: 20
+	sbatch: 64
+	lr: 0.01
+	nlayers: 1
+	nhid: 1200
+	parameter: 
+	samples: 10
+	rho: -3.0
+	sig1: 0.0
+	sig2: 6.0
+	pi: 0.25
+	arch: mlp
+	resume: no
+	sti: 0
+====================================================================================================
+Using device: cuda:0
+mnist2_ucb
+Results will be saved in  ../checkpoints/mnist2_ucb
+
+
+Starting this run on :
+2025-01-01 13:08
+Load data...
+Input size = [1, 28, 28] 
+Task info = [(0, 5), (1, 5)]
+Inits...
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+****************************************************************************************************
+Task  0 (mnist-0-4)
+****************************************************************************************************
+| Epoch   1, time=136.6ms/  2.1ms | Train: loss=0.000, acc= 98.1% | Valid: loss=0.000, acc= 98.1% | *
+| Epoch   2, time=136.6ms/  2.1ms | Train: loss=0.000, acc= 98.8% | Valid: loss=0.000, acc= 98.8% | *
+| Epoch   3, time=136.0ms/  2.0ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch   4, time=135.3ms/  2.1ms | Train: loss=0.000, acc= 99.3% | Valid: loss=0.000, acc= 99.3% | *
+| Epoch   5, time=135.9ms/  2.2ms | Train: loss=0.000, acc= 99.4% | Valid: loss=0.000, acc= 99.4% | *
+| Epoch   6, time=137.3ms/  2.2ms | Train: loss=0.000, acc= 99.6% | Valid: loss=0.000, acc= 99.6% | *
+| Epoch   7, time=136.7ms/  2.1ms | Train: loss=0.000, acc= 99.6% | Valid: loss=0.000, acc= 99.6% | *
+| Epoch   8, time=135.8ms/  2.1ms | Train: loss=0.000, acc= 99.7% | Valid: loss=0.000, acc= 99.7% | *
+| Epoch   9, time=134.8ms/  2.1ms | Train: loss=0.000, acc= 99.8% | Valid: loss=0.000, acc= 99.8% | *
+| Epoch  10, time=134.8ms/  2.1ms | Train: loss=0.000, acc= 99.8% | Valid: loss=0.000, acc= 99.8% | *
+| Epoch  11, time=134.7ms/  2.0ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  12, time=134.9ms/  2.1ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  13, time=138.4ms/  2.1ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  14, time=136.8ms/  2.1ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  15, time=136.7ms/  2.0ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  16, time=136.0ms/  2.1ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+| Epoch  17, time=137.5ms/  2.1ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+| Epoch  18, time=137.3ms/  2.1ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+| Epoch  19, time=136.9ms/  2.1ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+| Epoch  20, time=134.6ms/  2.1ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - mnist-0-4      : loss=0.000, acc=99.397% <<<
+Save at ../checkpoints/mnist2_ucb
+****************************************************************************************************
+Task  1 (mnist-5-9)
+****************************************************************************************************
+| Epoch   1, time=136.6ms/  2.1ms | Train: loss=0.000, acc= 86.8% | Valid: loss=0.000, acc= 86.8% | *
+| Epoch   2, time=135.8ms/  2.0ms | Train: loss=0.000, acc= 90.6% | Valid: loss=0.000, acc= 90.6% | *
+| Epoch   3, time=136.4ms/  2.0ms | Train: loss=0.000, acc= 92.1% | Valid: loss=0.000, acc= 92.1% | *
+| Epoch   4, time=136.5ms/  2.1ms | Train: loss=0.000, acc= 93.0% | Valid: loss=0.000, acc= 93.0% | *
+| Epoch   5, time=137.3ms/  2.1ms | Train: loss=0.000, acc= 93.7% | Valid: loss=0.000, acc= 93.7% | *
+| Epoch   6, time=137.0ms/  2.0ms | Train: loss=0.000, acc= 94.1% | Valid: loss=0.000, acc= 94.1% | *
+| Epoch   7, time=134.9ms/  2.0ms | Train: loss=0.000, acc= 94.6% | Valid: loss=0.000, acc= 94.6% | *
+| Epoch   8, time=134.9ms/  2.1ms | Train: loss=0.000, acc= 94.8% | Valid: loss=0.000, acc= 94.8% | *
+| Epoch   9, time=135.4ms/  2.1ms | Train: loss=0.000, acc= 95.1% | Valid: loss=0.000, acc= 95.1% | *
+| Epoch  10, time=135.6ms/  2.1ms | Train: loss=0.000, acc= 95.4% | Valid: loss=0.000, acc= 95.4% | *
+| Epoch  11, time=136.5ms/  2.0ms | Train: loss=0.000, acc= 95.6% | Valid: loss=0.000, acc= 95.6% | *
+| Epoch  12, time=135.8ms/  2.1ms | Train: loss=0.000, acc= 95.8% | Valid: loss=0.000, acc= 95.8% | *
+| Epoch  13, time=136.1ms/  2.1ms | Train: loss=0.000, acc= 96.0% | Valid: loss=0.000, acc= 96.0% | *
+| Epoch  14, time=136.3ms/  2.0ms | Train: loss=0.000, acc= 96.1% | Valid: loss=0.000, acc= 96.1% | *
+| Epoch  15, time=136.1ms/  2.2ms | Train: loss=0.000, acc= 96.2% | Valid: loss=0.000, acc= 96.2% | *
+| Epoch  16, time=135.8ms/  2.1ms | Train: loss=0.000, acc= 96.3% | Valid: loss=0.000, acc= 96.3% | *
+| Epoch  17, time=136.5ms/  2.1ms | Train: loss=0.000, acc= 96.4% | Valid: loss=0.000, acc= 96.4% | *
+| Epoch  18, time=136.6ms/  2.1ms | Train: loss=0.000, acc= 96.6% | Valid: loss=0.000, acc= 96.6% | *
+| Epoch  19, time=136.5ms/  2.1ms | Train: loss=0.000, acc= 96.6% | Valid: loss=0.000, acc= 96.6% | *
+| Epoch  20, time=135.6ms/  2.0ms | Train: loss=0.000, acc= 96.7% | Valid: loss=0.000, acc= 96.7% | *
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - mnist-0-4      : loss=0.000, acc=99.397% <<<
+>>> Test on task  1 - mnist-5-9      : loss=0.000, acc=96.359% <<<
+Save at ../checkpoints/mnist2_ucb
+****************************************************************************************************
+Accuracies =
+	,0.9940% ,0.0000% ,
+	,0.9940% ,0.9636% ,
+ACC: 0.9788%
+
+
+BWT :  0.00%
+****************************************************************************************************
+Done!
+Log file saved in  ../checkpoints/mnist2_ucb/mnist2_ucb_seed_0.p
+[Elapsed time = 0.7 h]

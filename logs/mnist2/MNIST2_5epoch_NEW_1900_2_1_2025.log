@@ -1,0 +1,79 @@
+====================================================================================================
+Arguments =
+        seed: 0
+        device: cuda:0
+        experiment: mnist2
+        approach: ucb
+        data_path: ../data/
+        output: 
+        checkpoint_dir: ../checkpoints/
+        nepochs: 5
+        sbatch: 64
+        lr: 0.01
+        nlayers: 1
+        nhid: 1200
+        parameter: 
+        samples: 10
+        rho: -3.0
+        sig1: 0.0
+        sig2: 6.0
+        pi: 0.25
+        arch: mlp
+        resume: no
+        sti: 0
+====================================================================================================
+Using device: cuda:0
+mnist2_ucb
+Results will be saved in  ../checkpoints/mnist2_ucb
+
+
+Starting this run on :
+2025-01-02 18:43
+Load data...
+Input size = [1, 28, 28] 
+Task info = [(0, 5), (1, 5)]
+Inits...
+----------------------------------------------------------------------------------------------------
+UCB New
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+****************************************************************************************************
+Task  0 (mnist-0-4)
+****************************************************************************************************
+/home/ugupta/deep_learning/Deep_Learning_ETH_Fall/src/approaches/utils.py:68: UserWarning: This overload of add_ is deprecated:
+        add_(Number alpha, Tensor other)
+Consider using one of the following signatures instead:
+        add_(Tensor other, *, Number alpha) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:1050.)
+  p.data.add_(-group['lr'], d_p)
+| Epoch   1, time=140.9ms/  2.2ms | Train: loss=0.000, acc= 98.1% | Valid: loss=0.000, acc= 98.1% | *
+| Epoch   2, time=141.5ms/  2.2ms | Train: loss=0.000, acc= 98.8% | Valid: loss=0.000, acc= 98.8% | *
+| Epoch   3, time=142.3ms/  2.1ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch   4, time=140.7ms/  2.2ms | Train: loss=0.000, acc= 99.3% | Valid: loss=0.000, acc= 99.3% | *
+| Epoch   5, time=142.3ms/  2.2ms | Train: loss=0.000, acc= 99.4% | Valid: loss=0.000, acc= 99.4% | *
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - mnist-0-4      : loss=0.000, acc=99.105% <<<
+Save at ../checkpoints/mnist2_ucb
+****************************************************************************************************
+Task  1 (mnist-5-9)
+****************************************************************************************************
+| Epoch   1, time=158.1ms/  2.2ms | Train: loss=0.000, acc= 97.2% | Valid: loss=0.000, acc= 97.2% | *
+| Epoch   2, time=158.3ms/  2.2ms | Train: loss=0.000, acc= 98.2% | Valid: loss=0.000, acc= 98.2% | *
+| Epoch   3, time=160.0ms/  2.3ms | Train: loss=0.000, acc= 98.8% | Valid: loss=0.000, acc= 98.8% | *
+| Epoch   4, time=168.2ms/  2.4ms | Train: loss=0.000, acc= 99.0% | Valid: loss=0.000, acc= 99.0% | *
+| Epoch   5, time=167.6ms/  2.3ms | Train: loss=0.000, acc= 99.2% | Valid: loss=0.000, acc= 99.2% | *
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - mnist-0-4      : loss=0.000, acc=98.871% <<<
+>>> Test on task  1 - mnist-5-9      : loss=0.000, acc=98.293% <<<
+Save at ../checkpoints/mnist2_ucb
+****************************************************************************************************
+Accuracies =
+        ,0.9910% ,0.0000% ,
+        ,0.9887% ,0.9829% ,
+ACC: 0.9858%
+
+
+BWT : -0.00%
+****************************************************************************************************
+Done!
+Log file saved in  ../checkpoints/mnist2_ucb/mnist2_ucb_seed_0.p
+[Elapsed time = 0.2 h]
