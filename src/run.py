@@ -159,7 +159,7 @@ for t,ncla in taskcla[args.sti:]:
     for u in range(t+1):
         xtest=data[u]['test']['x'].to(args.device)
         ytest=data[u]['test']['y'].to(args.device)
-        test_loss,test_acc=appr.eval(u,xtest,ytest,debug=True)
+        test_loss,test_acc=appr.eval(u,xtest,ytest)
         print('>>> Test on task {:2d} - {:15s}: loss={:.3f}, acc={:5.3f}% <<<'.format(u,data[u]['name'],test_loss,100*test_acc))
         acc[t,u]=test_acc
         lss[t,u]=test_loss

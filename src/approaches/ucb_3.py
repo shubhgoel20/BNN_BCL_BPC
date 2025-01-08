@@ -77,36 +77,40 @@ class Appr(object):
         return kl_div
 
     def generate_coreset(self, task_X_, task_y_):
-        coreset_size = shared_model_task_cache["args"].coreset_size
+        # coreset_size = shared_model_task_cache["args"].coreset_size
         last_model = shared_model_task_cache["last_task"]
         state_dict = self.model_with_gmm_prior_dict if last_model is None else copy.deepcopy(shared_model_task_cache["models"][last_model].state_dict())
         n_ = task_X_.shape[0]
-        indices = np.random.choice(n_, int(self.replay_buffer_perc*n_), replace=False)
+        indices = np.random.choice(n_, n_, replace=False)
         task_X = task_X_[indices]
-        task_y = task_y_[indices]        
-        remaining_indices = list(range(len(task_X)))
-        coreset_indices = []
+        task_y = task_y_[indices]
 
-        for _ in range(coreset_size):
-            best_idx = None
-            best_loss = np.inf
+        # remaining_indices = list(range(len(task_X)))
+        # coreset_indices = []
+        coreset_size = int(self.replay_buffer_perc*n_)
 
-            for idx in remaining_indices:
-                candidate_indices = coreset_indices + [idx]
-                X_subset = task_X[candidate_indices]
-                y_subset = task_y[candidate_indices]
-                model = load_network_with_args()
-                model.load_state_dict(copy.deepcopy(state_dict))
-                stub_model_trained = self.train_stub(model, X_subset, y_subset)
-                kl_div = self.get_kl_divergence(stub_model_trained, self.model)
-                if kl_div < best_loss:
-                    best_loss = kl_div
-                    best_idx = idx
-                    print(f"Possible coreset entry found: {best_idx} : {best_loss}")
-            coreset_indices.append(best_idx)
-            remaining_indices.remove(best_idx)
-            print(f"Coreset entry added: {best_idx} : {best_loss}")
-        self.coresets[self.current_task] = (task_X[coreset_indices], task_y[coreset_indices])
+        # for _ in range(coreset_size):
+        # best_idx = None
+        best_loss = np.inf
+
+        for i in range((n_ // coreset_size) - 1):
+            # candidate_indices = coreset_indices + [idx]
+            candidate_indices = list(range(i*coreset_size, (i+1)*coreset_size))
+            X_subset = task_X[candidate_indices]
+            y_subset = task_y[candidate_indices]
+            model = load_network_with_args()
+            model.load_state_dict(copy.deepcopy(state_dict))
+            stub_model_trained = self.train_stub(model, X_subset, y_subset)
+            kl_div = self.get_kl_divergence(stub_model_trained, self.model)
+            if kl_div < best_loss:
+                best_loss = kl_div
+                # best_idx = idx
+                print(f"Possible coreset entry found: {i} : {best_loss}")
+                self.coresets[self.current_task] = (X_subset, y_subset)
+            # coreset_indices.append(best_idx)
+            # remaining_indices.remove(best_idx)
+            # print(f"Coreset entry added: {best_idx} : {best_loss}")
+        # self.coresets[self.current_task] = (task_X[coreset_indices], task_y[coreset_indices])
         
     def train_stub(self, model, xtrain, ytrain):
         params_dict = self.get_model_params()
