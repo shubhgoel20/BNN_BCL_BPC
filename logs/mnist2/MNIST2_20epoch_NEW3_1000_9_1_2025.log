@@ -1,0 +1,113 @@
+====================================================================================================
+Arguments =
+	seed: 0
+	device: cuda:0
+	experiment: mnist2
+	approach: ucb
+	data_path: ../data/
+	output: 
+	checkpoint_dir: ../checkpoints/
+	nepochs: 20
+	sbatch: 64
+	lr: 0.01
+	nlayers: 1
+	nhid: 1200
+	parameter: 
+	rbuff_size: 0.05
+	coreset_size: 5
+	samples: 10
+	rho: -3.0
+	sig1: 0.0
+	sig2: 6.0
+	pi: 0.25
+	arch: mlp
+	resume: no
+	sti: 0
+====================================================================================================
+Using device: cuda:0
+mnist2_ucb
+Results will be saved in  ../checkpoints/mnist2_ucb
+
+
+Starting this run on :
+2025-01-08 20:58
+Load data...
+Input size = [1, 28, 28] 
+Task info = [(0, 5), (1, 5)]
+Inits...
+----------------------------------------------------------------------------------------------------
+UCB New3
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+****************************************************************************************************
+Task  0 (mnist-0-4)
+****************************************************************************************************
+| Epoch   1, time=148.3ms/  2.4ms | Train: loss=0.000, acc= 98.1% | Valid: loss=0.000, acc= 98.1% | *
+| Epoch   2, time=148.2ms/  2.4ms | Train: loss=0.000, acc= 98.8% | Valid: loss=0.000, acc= 98.8% | *
+| Epoch   3, time=153.3ms/  2.4ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch   4, time=154.0ms/  2.4ms | Train: loss=0.000, acc= 99.3% | Valid: loss=0.000, acc= 99.3% | *
+| Epoch   5, time=155.6ms/  2.5ms | Train: loss=0.000, acc= 99.4% | Valid: loss=0.000, acc= 99.4% | *
+| Epoch   6, time=164.4ms/  2.4ms | Train: loss=0.000, acc= 99.6% | Valid: loss=0.000, acc= 99.6% | *
+| Epoch   7, time=156.7ms/  2.5ms | Train: loss=0.000, acc= 99.6% | Valid: loss=0.000, acc= 99.6% | *
+| Epoch   8, time=160.2ms/  2.4ms | Train: loss=0.000, acc= 99.7% | Valid: loss=0.000, acc= 99.7% | *
+| Epoch   9, time=157.8ms/  2.5ms | Train: loss=0.000, acc= 99.8% | Valid: loss=0.000, acc= 99.8% | *
+| Epoch  10, time=159.0ms/  2.5ms | Train: loss=0.000, acc= 99.8% | Valid: loss=0.000, acc= 99.8% | *
+| Epoch  11, time=158.5ms/  2.5ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  12, time=158.0ms/  2.5ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  13, time=157.6ms/  2.5ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  14, time=151.7ms/  2.4ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  15, time=152.4ms/  2.4ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  16, time=151.8ms/  2.4ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+| Epoch  17, time=147.4ms/  2.3ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+| Epoch  18, time=147.9ms/  2.4ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+| Epoch  19, time=147.9ms/  2.4ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+| Epoch  20, time=148.3ms/  2.4ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+Possible coreset entry found: 0 : 18393.93359375
+Possible coreset entry found: 3 : 18374.0546875
+Possible coreset entry found: 7 : 18360.9375
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - mnist-0-4      : loss=0.000, acc=99.397% <<<
+Save at ../checkpoints/mnist2_ucb
+****************************************************************************************************
+Task  1 (mnist-5-9)
+****************************************************************************************************
+| Epoch   1, time=170.7ms/  2.3ms | Train: loss=0.000, acc= 97.4% | Valid: loss=0.000, acc= 97.4% | *
+| Epoch   2, time=171.0ms/  2.3ms | Train: loss=0.000, acc= 98.2% | Valid: loss=0.000, acc= 98.2% | *
+| Epoch   3, time=170.7ms/  2.3ms | Train: loss=0.000, acc= 98.7% | Valid: loss=0.000, acc= 98.7% | *
+| Epoch   4, time=170.3ms/  2.3ms | Train: loss=0.000, acc= 99.0% | Valid: loss=0.000, acc= 99.0% | *
+| Epoch   5, time=170.9ms/  2.3ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch   6, time=170.1ms/  2.3ms | Train: loss=0.000, acc= 99.3% | Valid: loss=0.000, acc= 99.3% | *
+| Epoch   7, time=170.6ms/  2.3ms | Train: loss=0.000, acc= 99.4% | Valid: loss=0.000, acc= 99.4% | *
+| Epoch   8, time=170.9ms/  2.3ms | Train: loss=0.000, acc= 99.6% | Valid: loss=0.000, acc= 99.6% | *
+| Epoch   9, time=170.8ms/  2.3ms | Train: loss=0.000, acc= 99.5% | Valid: loss=0.000, acc= 99.5% | *
+| Epoch  10, time=170.9ms/  2.3ms | Train: loss=0.000, acc= 99.6% | Valid: loss=0.000, acc= 99.6% | *
+| Epoch  11, time=170.3ms/  2.3ms | Train: loss=0.000, acc= 99.7% | Valid: loss=0.000, acc= 99.7% | *
+| Epoch  12, time=183.1ms/  2.4ms | Train: loss=0.000, acc= 99.7% | Valid: loss=0.000, acc= 99.7% | *
+| Epoch  13, time=178.3ms/  2.3ms | Train: loss=0.000, acc= 99.8% | Valid: loss=0.000, acc= 99.8% | *
+| Epoch  14, time=175.2ms/  2.3ms | Train: loss=0.000, acc= 99.8% | Valid: loss=0.000, acc= 99.8% | *
+| Epoch  15, time=172.1ms/  2.3ms | Train: loss=0.000, acc= 99.8% | Valid: loss=0.000, acc= 99.8% | *
+| Epoch  16, time=164.7ms/  2.3ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  17, time=164.5ms/  2.2ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  18, time=164.6ms/  2.2ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  19, time=164.6ms/  2.2ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch  20, time=164.5ms/  2.2ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+Possible coreset entry found: 0 : 33962.58203125
+Possible coreset entry found: 1 : 33955.453125
+Possible coreset entry found: 3 : 33915.640625
+Possible coreset entry found: 5 : 33881.93359375
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - mnist-0-4      : loss=0.000, acc=99.377% <<<
+>>> Test on task  1 - mnist-5-9      : loss=0.000, acc=98.642% <<<
+Save at ../checkpoints/mnist2_ucb
+****************************************************************************************************
+Accuracies =
+	,0.9940% ,0.0000% ,
+	,0.9938% ,0.9864% ,
+ACC: 0.9901%
+
+
+BWT : -0.00%
+****************************************************************************************************
+Done!
+Log file saved in  ../checkpoints/mnist2_ucb/mnist2_ucb_seed_0.p
+[Elapsed time = 1.6 h]
