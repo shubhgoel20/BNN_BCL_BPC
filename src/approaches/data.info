@@ -1,3 +1,0 @@
-['fc1.weight_mu', 'fc1.weight_rho', 'fc1.bias_mu', 'fc1.bias_rho', 'fc1.weight.mu', 'fc1.weight.rho', 'fc1.bias.mu', 'fc1.bias.rho', 'classifier.0.weight_mu', 'classifier.0.weight_rho', 'classifier.0.bias_mu', 'classifier.0.bias_rho', 'classifier.0.weight.mu', 'classifier.0.weight.rho', 'classifier.0.bias.mu', 'classifier.0.bias.rho', 'classifier.1.weight_mu', 'classifier.1.weight_rho', 'classifier.1.bias_mu', 'classifier.1.bias_rho', 'classifier.1.weight.mu', 'classifier.1.weight.rho', 'classifier.1.bias.mu', 'classifier.1.bias.rho']
-
-{'classifier.0', 'fc1', 'classifier.1'}
