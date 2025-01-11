@@ -2,14 +2,15 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .BayesianConvs import BayesianConv2D
 from .BatchNorm import BayesianBatchNorm2d
+from .BayesianConvs import BayesianConv2D
 from .FC import BayesianLinear
 
 
-
 def conv3x3(in_planes, out_planes, args, stride=1):
-    return BayesianConv2D(in_planes, out_planes, 3, args=args, stride=stride, padding=1, use_bias=True)
+    return BayesianConv2D(
+        in_planes, out_planes, 3, args=args, stride=stride, padding=1, use_bias=True
+    )
 
 
 class BasicBlock(nn.Module):
@@ -51,9 +52,13 @@ class Bottleneck(nn.Module):
         super(Bottleneck, self).__init__()
         self.conv1 = BayesianConv2D(inplanes, planes, 1, args, use_bias=True)
         self.bn1 = BayesianBatchNorm2d(planes, args)
-        self.conv2 = BayesianConv2D(planes, planes, 3, args, stride=stride, padding=1, use_bias=True)
+        self.conv2 = BayesianConv2D(
+            planes, planes, 3, args, stride=stride, padding=1, use_bias=True
+        )
         self.bn2 = BayesianBatchNorm2d(planes, args)
-        self.conv3 = BayesianConv2D(planes, planes * self.expansion, args, kernel_size=1, use_bias=True)
+        self.conv3 = BayesianConv2D(
+            planes, planes * self.expansion, args, kernel_size=1, use_bias=True
+        )
         self.bn3 = BayesianBatchNorm2d(planes * self.expansion, args)
         self.downsample = downsample
         self.stride = stride
@@ -98,8 +103,9 @@ class BayesianResNet(nn.Module):
 
         self.num_ftrs = 256 * block.expansion
 
-        self.conv1 = BayesianConv2D(ncha, 32, 7, args, stride=2, padding=3,
-                                    use_bias=True)
+        self.conv1 = BayesianConv2D(
+            ncha, 32, 7, args, stride=2, padding=3, use_bias=True
+        )
         self.bn1 = BayesianBatchNorm2d(32, args)
         self.layer1 = self._make_layer(block, 32, layers[0])
         self.layer2 = self._make_layer(block, 64, layers[1], stride=2)
@@ -111,13 +117,18 @@ class BayesianResNet(nn.Module):
         for t, n in self.taskcla:
             self.classifier.append(BayesianLinear(self.num_ftrs, n, args))
 
-
     def _make_layer(self, block, planes, blocks, stride=1):
         downsample = None
         if stride != 1 or self.inplanes != planes * block.expansion:
             downsample = nn.Sequential(
-                BayesianConv2D(self.inplanes, planes * block.expansion, 1, self.args,
-                               stride=stride, use_bias=True),
+                BayesianConv2D(
+                    self.inplanes,
+                    planes * block.expansion,
+                    1,
+                    self.args,
+                    stride=stride,
+                    use_bias=True,
+                ),
                 BayesianBatchNorm2d(planes * block.expansion, self.args),
             )
 
@@ -153,8 +164,6 @@ class BayesianResNet(nn.Module):
         for t, i in self.taskcla:
             y.append(self.classifier[t](x, sample))
         return [F.log_softmax(yy, dim=1) for yy in y]
-
-
 
 
 # def ucb(experiment):
