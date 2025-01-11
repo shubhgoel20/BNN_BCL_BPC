@@ -102,7 +102,7 @@ elif args.experiment == "mixture":
 
 # Args -- Approach
 if args.approach == "ucb":
-    from approaches import ucb_uniform as approach
+    from approaches import ucb_bpc as approach
 
 # Args -- Network
 if (
