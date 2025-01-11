@@ -12,7 +12,7 @@ from torch.distributions import Normal
 class Appr(object):
 
     def __init__(self,model,args,lr_min=1e-6,lr_factor=3,lr_patience=5,clipgrad=1000):
-        print("UCB New3")
+        print("UCB BPC")
         self.model=model
         self.device = args.device
         self.lr_min=lr_min
