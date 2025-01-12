@@ -1,0 +1,127 @@
+====================================================================================================
+Arguments =
+	seed: 0
+	device: cuda:0
+	experiment: mnist5
+	approach: ucb
+	data_path: ../data/
+	output: 
+	checkpoint_dir: ../checkpoints/
+	nepochs: 5
+	sbatch: 64
+	lr: 0.01
+	nlayers: 1
+	nhid: 1200
+	parameter: 
+	rbuff_size: 0.05
+	coreset_size: 5
+	pseudocoreset: False
+	samples: 10
+	rho: -3.0
+	sig1: 0.0
+	sig2: 6.0
+	pi: 0.25
+	arch: mlp
+	resume: no
+	sti: 0
+====================================================================================================
+Using device: cuda:0
+mnist5_ucb
+Results will be saved in  ../checkpoints/mnist5_ucb
+
+
+Starting this run on :
+2025-01-12 13:34
+Load data...
+Input size = [1, 28, 28] 
+Task info = [(0, 2), (1, 2), (2, 2), (3, 2), (4, 2)]
+Inits...
+----------------------------------------------------------------------------------------------------
+UCB Uniform
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+****************************************************************************************************
+Task  0 (mnist-0-1)
+****************************************************************************************************
+| Epoch   1, time=221.3ms/  4.7ms | Train: loss=0.000, acc= 99.8% | Valid: loss=0.000, acc= 99.8% | *
+| Epoch   2, time=219.9ms/  4.8ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch   3, time=215.3ms/  4.7ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+| Epoch   4, time=215.5ms/  4.7ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+| Epoch   5, time=210.3ms/  4.7ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - mnist-0-1      : loss=0.000, acc=99.953% <<<
+Save at ../checkpoints/mnist5_ucb
+****************************************************************************************************
+Task  1 (mnist-2-3)
+****************************************************************************************************
+| Epoch   1, time=241.5ms/  4.9ms | Train: loss=0.000, acc= 98.1% | Valid: loss=0.000, acc= 98.1% | *
+| Epoch   2, time=250.4ms/  4.9ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch   3, time=250.9ms/  4.8ms | Train: loss=0.000, acc= 99.3% | Valid: loss=0.000, acc= 99.3% | *
+| Epoch   4, time=249.7ms/  4.8ms | Train: loss=0.000, acc= 99.6% | Valid: loss=0.000, acc= 99.6% | *
+| Epoch   5, time=250.4ms/  4.9ms | Train: loss=0.000, acc= 99.6% | Valid: loss=0.000, acc= 99.6% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - mnist-0-1      : loss=0.000, acc=99.953% <<<
+>>> Test on task  1 - mnist-2-3      : loss=0.000, acc=99.265% <<<
+Save at ../checkpoints/mnist5_ucb
+****************************************************************************************************
+Task  2 (mnist-4-5)
+****************************************************************************************************
+| Epoch   1, time=280.7ms/  5.1ms | Train: loss=0.000, acc= 99.4% | Valid: loss=0.000, acc= 99.4% | *
+| Epoch   2, time=291.2ms/  5.2ms | Train: loss=0.000, acc= 99.6% | Valid: loss=0.000, acc= 99.6% | *
+| Epoch   3, time=278.8ms/  4.8ms | Train: loss=0.000, acc= 99.7% | Valid: loss=0.000, acc= 99.7% | *
+| Epoch   4, time=276.6ms/  5.0ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch   5, time=286.1ms/  5.3ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - mnist-0-1      : loss=0.000, acc=99.953% <<<
+>>> Test on task  1 - mnist-2-3      : loss=0.000, acc=99.265% <<<
+>>> Test on task  2 - mnist-4-5      : loss=0.000, acc=99.893% <<<
+Save at ../checkpoints/mnist5_ucb
+****************************************************************************************************
+Task  3 (mnist-6-7)
+****************************************************************************************************
+| Epoch   1, time=291.9ms/  4.9ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch   2, time=276.5ms/  4.9ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch   3, time=277.5ms/  4.9ms | Train: loss=0.000, acc= 99.9% | Valid: loss=0.000, acc= 99.9% | *
+| Epoch   4, time=277.4ms/  5.1ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+| Epoch   5, time=292.7ms/  4.9ms | Train: loss=0.000, acc=100.0% | Valid: loss=0.000, acc=100.0% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - mnist-0-1      : loss=0.000, acc=99.953% <<<
+>>> Test on task  1 - mnist-2-3      : loss=0.000, acc=99.167% <<<
+>>> Test on task  2 - mnist-4-5      : loss=0.000, acc=99.893% <<<
+>>> Test on task  3 - mnist-6-7      : loss=0.000, acc=99.849% <<<
+Save at ../checkpoints/mnist5_ucb
+****************************************************************************************************
+Task  4 (mnist-8-9)
+****************************************************************************************************
+| Epoch   1, time=308.5ms/  4.9ms | Train: loss=0.000, acc= 98.8% | Valid: loss=0.000, acc= 98.8% | *
+| Epoch   2, time=308.5ms/  5.1ms | Train: loss=0.000, acc= 99.3% | Valid: loss=0.000, acc= 99.3% | *
+| Epoch   3, time=310.9ms/  5.2ms | Train: loss=0.000, acc= 99.5% | Valid: loss=0.000, acc= 99.5% | *
+| Epoch   4, time=311.5ms/  4.9ms | Train: loss=0.000, acc= 99.6% | Valid: loss=0.000, acc= 99.6% | *
+| Epoch   5, time=307.8ms/  5.1ms | Train: loss=0.000, acc= 99.8% | Valid: loss=0.000, acc= 99.8% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - mnist-0-1      : loss=0.000, acc=99.953% <<<
+>>> Test on task  1 - mnist-2-3      : loss=0.000, acc=99.119% <<<
+>>> Test on task  2 - mnist-4-5      : loss=0.000, acc=99.893% <<<
+>>> Test on task  3 - mnist-6-7      : loss=0.000, acc=99.799% <<<
+>>> Test on task  4 - mnist-8-9      : loss=0.000, acc=99.395% <<<
+Save at ../checkpoints/mnist5_ucb
+****************************************************************************************************
+Accuracies =
+	,0.9995% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.9995% ,0.9927% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.9995% ,0.9927% ,0.9989% ,0.0000% ,0.0000% ,
+	,0.9995% ,0.9917% ,0.9989% ,0.9985% ,0.0000% ,
+	,0.9995% ,0.9912% ,0.9989% ,0.9980% ,0.9939% ,
+ACC: 0.9963%
+
+
+BWT : -0.00%
+****************************************************************************************************
+Done!
+Log file saved in  ../checkpoints/mnist5_ucb/mnist5_ucb_seed_0.p
+[Elapsed time = 0.4 h]
