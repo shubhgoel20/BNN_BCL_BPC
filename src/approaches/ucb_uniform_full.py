@@ -1,5 +1,6 @@
 import copy
 import math
+import random
 import time
 
 import numpy as np
@@ -16,43 +17,39 @@ class Appr(Approach_BCL):
     ):
         super().__init__(model, args, lr_min, lr_factor, lr_patience, clipgrad)
 
-        self.coresets = self.shared_model_cache["coresets"]
+        self.prev_task_data = self.shared_model_cache["prev_task_data"]
         self.task_freq = self.shared_model_cache["task_frquencies"]
         self.replay_buffer_perc = args.rbuff_size
-        self.model_with_gmm_prior_dict = model.state_dict()
 
-        print("Uniform Sampling Coresets")
+        print("Uniform Sampling at every epoch")
 
-    def generate_coreset(self, task_X_, task_y_):
-        n_ = task_X_.shape[0]
-        coreset_size = int(self.replay_buffer_perc * n_)
-        indices = np.random.choice(n_, coreset_size, replace=False)
-        task_X = task_X_[indices]
-        task_y = task_y_[indices]
-        self.coresets[self.current_task] = (task_X, task_y)
-        print("Generated Uniform Coreset")
+    def get_prob_from_freq(self):
+        n = len(self.task_freq.keys())
+        probs = {key: 1 / n for key in self.task_freq.keys()}
+        return probs
 
-    def train_stub(self, model, xtrain, ytrain):
-        params_dict = self.get_model_params()
-        self.optimizer = BayesianSGD(params=params_dict)
-        try:
-            for _ in range(self.nepochs):
-                self.train_epoch_(self.current_task, xtrain, ytrain, model_=model)
-        except KeyboardInterrupt:
-            pass
-        return model
+    def sample_prev_task(self, probs):
+        keys = list(probs.keys())
+        values = list(probs.values())
+        return random.choices(keys, weights=values, k=1)[0]
+
+    def get_buffer(self, prev_task, buffer_size):
+        prev_xtrain = self.prev_task_data[prev_task]["xtrain"]
+        prev_ytrain = self.prev_task_data[prev_task]["ytrain"]
+        n_ = prev_xtrain.shape[0]
+        if n_ <= buffer_size:
+            return prev_xtrain, prev_ytrain
+        indices = np.random.choice(n_, buffer_size, replace=False)
+        prev_xtrain = prev_xtrain[indices]
+        prev_ytrain = prev_ytrain[indices]
+        return prev_xtrain, prev_ytrain
 
     def train(self, task_num, xtrain, ytrain, xvalid, yvalid):
 
-        # Update the next learning rate for each parameter based on their uncertainty
         update_last_task(task_num)
-        self.current_task = task_num
         params_dict = self.get_model_params()
         self.optimizer = BayesianSGD(params=params_dict)
-
         best_loss = np.inf
-
-        # best_model=copy.deepcopy(self.model)
         best_model = copy.deepcopy(self.model.state_dict())
         lr = self.init_lr
         patience = self.lr_patience
@@ -60,8 +57,18 @@ class Appr(Approach_BCL):
         # Loop epochs
         try:
             for e in range(self.nepochs):
+                if len(self.prev_task_data.keys()) > 0:
+                    probs = self.get_prob_from_freq()
+                    sampled_task = self.sample_prev_task(probs)
+                    self.task_freq[sampled_task] += 1
+                    prev_xtrain, prev_ytrain = self.get_buffer(
+                        sampled_task, int(self.replay_buffer_perc * xtrain.shape[0])
+                    )
+                    self.sampled_task = sampled_task
+                else:
+                    prev_xtrain, prev_ytrain = None, None
                 clock0 = time.time()
-                self.train_epoch(task_num, xtrain, ytrain)
+                self.train_epoch(task_num, xtrain, ytrain, prev_xtrain, prev_ytrain)
                 clock1 = time.time()
                 train_loss, train_acc = self.eval(task_num, xtrain, ytrain)
                 clock2 = time.time()
@@ -113,12 +120,11 @@ class Appr(Approach_BCL):
         except KeyboardInterrupt:
             print()
         self.task_freq[task_num] = int(1 / self.replay_buffer_perc)
-        self.generate_coreset(xtrain, ytrain)
+
         self.model.load_state_dict(copy.deepcopy(best_model))
         self.save_model(task_num)
 
-    def train_epoch(self, task_num, x, y):
+    def train_epoch(self, task_num, x, y, prevx=None, prevy=None):
         self.train_epoch_(task_num, x, y)
-        if len(self.coresets.keys()) > 0:
-            for k, v in self.coresets.items():
-                self.train_epoch_(k, v[0], v[1])
+        if prevx is not None and prevy is not None:
+            self.train_epoch_(self.sampled_task, prevx, prevy)

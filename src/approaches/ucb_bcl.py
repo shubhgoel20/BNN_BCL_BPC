@@ -3,56 +3,29 @@ import math
 import time
 
 import numpy as np
+import torch
 
-from .common import update_last_task
-from .ucb_bcl import Appr as Approach_BCL
+from .common import get_log_posterior_from_last_task, update_last_task
+from .ucb_base import Approach
 from .utils import BayesianSGD
 
 
-class Appr(Approach_BCL):
+class Appr(Approach):
 
     def __init__(
         self, model, args, lr_min=1e-6, lr_factor=3, lr_patience=5, clipgrad=1000
     ):
         super().__init__(model, args, lr_min, lr_factor, lr_patience, clipgrad)
-
-        self.coresets = self.shared_model_cache["coresets"]
-        self.task_freq = self.shared_model_cache["task_frquencies"]
-        self.replay_buffer_perc = args.rbuff_size
-        self.model_with_gmm_prior_dict = model.state_dict()
-
-        print("Uniform Sampling Coresets")
-
-    def generate_coreset(self, task_X_, task_y_):
-        n_ = task_X_.shape[0]
-        coreset_size = int(self.replay_buffer_perc * n_)
-        indices = np.random.choice(n_, coreset_size, replace=False)
-        task_X = task_X_[indices]
-        task_y = task_y_[indices]
-        self.coresets[self.current_task] = (task_X, task_y)
-        print("Generated Uniform Coreset")
-
-    def train_stub(self, model, xtrain, ytrain):
-        params_dict = self.get_model_params()
-        self.optimizer = BayesianSGD(params=params_dict)
-        try:
-            for _ in range(self.nepochs):
-                self.train_epoch_(self.current_task, xtrain, ytrain, model_=model)
-        except KeyboardInterrupt:
-            pass
-        return model
+        print("UCB Bayesian Continual Learning")
 
     def train(self, task_num, xtrain, ytrain, xvalid, yvalid):
 
-        # Update the next learning rate for each parameter based on their uncertainty
         update_last_task(task_num)
-        self.current_task = task_num
         params_dict = self.get_model_params()
         self.optimizer = BayesianSGD(params=params_dict)
 
         best_loss = np.inf
 
-        # best_model=copy.deepcopy(self.model)
         best_model = copy.deepcopy(self.model.state_dict())
         lr = self.init_lr
         patience = self.lr_patience
@@ -60,8 +33,9 @@ class Appr(Approach_BCL):
         # Loop epochs
         try:
             for e in range(self.nepochs):
+                # Train
                 clock0 = time.time()
-                self.train_epoch(task_num, xtrain, ytrain)
+                self.train_epoch_(task_num, xtrain, ytrain)
                 clock1 = time.time()
                 train_loss, train_acc = self.eval(task_num, xtrain, ytrain)
                 clock2 = time.time()
@@ -76,6 +50,7 @@ class Appr(Approach_BCL):
                     ),
                     end="",
                 )
+                # Valid
                 valid_loss, valid_acc = self.eval(task_num, xvalid, yvalid)
                 print(
                     " Valid: loss={:.3f}, acc={:5.1f}% |".format(
@@ -112,13 +87,64 @@ class Appr(Approach_BCL):
                 print()
         except KeyboardInterrupt:
             print()
-        self.task_freq[task_num] = int(1 / self.replay_buffer_perc)
-        self.generate_coreset(xtrain, ytrain)
+
+        # Restore best
         self.model.load_state_dict(copy.deepcopy(best_model))
         self.save_model(task_num)
 
-    def train_epoch(self, task_num, x, y):
-        self.train_epoch_(task_num, x, y)
-        if len(self.coresets.keys()) > 0:
-            for k, v in self.coresets.items():
-                self.train_epoch_(k, v[0], v[1])
+    def logs(self, task_num, model_=None):
+        if not model_:
+            model_ = self.model
+        lp_, lvp = 0.0, 0.0
+        for name in self.modules_names_without_cls:
+            n = name.split(".")
+            if len(n) == 1:
+                m = model_._modules[n[0]]
+            elif len(n) == 3:
+                m = model_._modules[n[0]]._modules[n[1]]._modules[n[2]]
+            elif len(n) == 4:
+                m = model_._modules[n[0]]._modules[n[1]]._modules[n[2]]._modules[n[3]]
+
+            lp_ += m.log_prior
+            lvp += m.log_variational_posterior
+
+        lp__, last_model_available = get_log_posterior_from_last_task(model_)
+        lp = lp__ if last_model_available else lp_
+        lp += model_.classifier[task_num].log_prior
+        lvp += model_.classifier[task_num].log_variational_posterior
+
+        return lp, lvp
+
+    def train_epoch_(self, task_num, x, y, model_=None):
+        if not model_:
+            model_ = self.model
+        model_.train()
+
+        r = np.arange(x.size(0))
+        np.random.shuffle(r)
+        r = torch.LongTensor(r).to(self.device)
+
+        num_batches = len(x) // self.sbatch
+        # Loop batches
+        for i in range(0, len(r), self.sbatch):
+
+            if i + self.sbatch <= len(r):
+                b = r[i : i + self.sbatch]
+            else:
+                b = r[i:]
+            images, targets = x[b].to(self.device), y[b].to(self.device)
+
+            # Forward
+            loss = self.elbo_loss(
+                images, targets, task_num, num_batches, sample=True, model_=model_
+            ).to(self.device)
+
+            # Backward
+            model_.cuda()
+            self.optimizer.zero_grad()
+            loss.backward(retain_graph=True)
+            model_.cuda()
+
+            # Update parameters
+            self.optimizer.step()
+        return

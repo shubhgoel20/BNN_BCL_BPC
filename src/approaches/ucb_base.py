@@ -1,11 +1,16 @@
-import torch
 import os
+
 import numpy as np
+import torch
+
 from .common import shared_model_task_cache
 
+
 class Approach(object):
-   
-    def __init__(self, model, args, lr_min=1e-6, lr_factor=3, lr_patience=5, clipgrad=1000):
+
+    def __init__(
+        self, model, args, lr_min=1e-6, lr_factor=3, lr_patience=5, clipgrad=1000
+    ):
         self.model = model
         self.device = args.device
         self.lr_min = lr_min
@@ -30,7 +35,7 @@ class Approach(object):
 
         self.modules_names_with_cls = self.find_modules_names(with_classifier=True)
         self.modules_names_without_cls = self.find_modules_names(with_classifier=False)
-    
+
     def find_modules_names(self, with_classifier=False):
         modules_names = []
         for name, p in self.model.named_parameters():
@@ -46,7 +51,7 @@ class Approach(object):
         if not with_classifier:
             shared_model_task_cache["modules_names_without_cls"] = modules_names
         return modules_names
-    
+
     def save_model(self, task_num):
         torch.save(
             {

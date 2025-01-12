@@ -8,6 +8,7 @@ import torch
 from .ucb_base import Approach
 from .utils import BayesianSGD
 
+
 class Appr(Approach):
 
     def __init__(

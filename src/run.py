@@ -1,6 +1,5 @@
 import argparse
 import os
-import sys
 import time
 from datetime import datetime
 
@@ -21,9 +20,23 @@ parser.add_argument(
     default="mnist5",
     type=str,
     required=True,
-    choices=["mnist2", "mnist5", "pmnist", "cifar", "mixture"],
+    choices=["mnist2", "mnist5", "pmnist", "cifar"],
 )
-parser.add_argument("--approach", default="acl", type=str, help="acl")
+parser.add_argument(
+    "--approach",
+    default="ucb_bpc",
+    type=str,
+    required=True,
+    choices=[
+        "ucb_adaptive_lr",
+        "ucb_bcl",
+        "ucb_uniform_full",
+        "ucb_simplified_coresets",
+        "ucb_uniform",
+        "ucb_bpc",
+    ],
+    help="Approach to run experiments with",
+)
 parser.add_argument("--data_path", default="../data/", type=str, help="gpu id")
 
 # Training parameters
@@ -38,7 +51,6 @@ parser.add_argument("--nlayers", default=1, type=int, help="")
 parser.add_argument("--nhid", default=1200, type=int, help="")
 parser.add_argument("--parameter", default="", type=str, help="")
 parser.add_argument("--rbuff_size", default=0.05, type=float, help="")
-parser.add_argument("--coreset_size", default=5, type=int, help="")
 parser.add_argument("--pseudocoreset", default=False, type=bool, help="")
 
 # UCB HYPER-PARAMETERS
@@ -101,7 +113,17 @@ elif args.experiment == "mixture":
     from dataloaders import mixture as dataloader
 
 # Args -- Approach
-if args.approach == "ucb":
+if args.approach == "ucb_adaptive_lr":
+    from approaches import ucb_adaptive_lr as approach
+elif args.approach == "ucb_bcl":
+    from approaches import ucb_bcl as approach
+elif args.approach == "ucb_uniform_full":
+    from approaches import ucb_uniform_full as approach
+elif args.approach == "ucb_simplified_coresets":
+    from approaches import ucb_simplified_coresets as approach
+elif args.approach == "ucb_uniform":
+    from approaches import ucb_uniform as approach
+elif args.approach == "ucb_bpc":
     from approaches import ucb_bpc as approach
 
 # Args -- Network
@@ -159,35 +181,12 @@ for t, ncla in taskcla[args.sti :]:
     print("Task {:2d} ({:s})".format(t, data[t]["name"]))
     print("*" * 100)
 
-    if args.approach == "joint":
-        # Get data. We do not put it to GPU
-        if t == 0:
-            xtrain = data[t]["train"]["x"]
-            ytrain = data[t]["train"]["y"]
-            xvalid = data[t]["valid"]["x"]
-            yvalid = data[t]["valid"]["y"]
-            task_t = t * torch.ones(xtrain.size(0)).int()
-            task_v = t * torch.ones(xvalid.size(0)).int()
-            task = [task_t, task_v]
-        else:
-            xtrain = torch.cat((xtrain, data[t]["train"]["x"]))
-            ytrain = torch.cat((ytrain, data[t]["train"]["y"]))
-            xvalid = torch.cat((xvalid, data[t]["valid"]["x"]))
-            yvalid = torch.cat((yvalid, data[t]["valid"]["y"]))
-            task_t = torch.cat(
-                (task_t, t * torch.ones(data[t]["train"]["y"].size(0)).int())
-            )
-            task_v = torch.cat(
-                (task_v, t * torch.ones(data[t]["valid"]["y"].size(0)).int())
-            )
-            task = [task_t, task_v]
-    else:
-        # Get data
-        xtrain = data[t]["train"]["x"].to(args.device)
-        ytrain = data[t]["train"]["y"].to(args.device)
-        xvalid = data[t]["valid"]["x"].to(args.device)
-        yvalid = data[t]["valid"]["y"].to(args.device)
-        task = t
+    # Get data
+    xtrain = data[t]["train"]["x"].to(args.device)
+    ytrain = data[t]["train"]["y"].to(args.device)
+    xvalid = data[t]["valid"]["x"].to(args.device)
+    yvalid = data[t]["valid"]["y"].to(args.device)
+    task = t
 
     # Train
     appr.train(task, xtrain, ytrain, xvalid, yvalid)

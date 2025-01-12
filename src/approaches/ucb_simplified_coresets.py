@@ -3,8 +3,10 @@ import math
 import time
 
 import numpy as np
+import torch
+from torch.distributions import Normal
 
-from .common import update_last_task
+from .common import load_network_with_args, update_last_task
 from .ucb_bcl import Appr as Approach_BCL
 from .utils import BayesianSGD
 
@@ -21,16 +23,91 @@ class Appr(Approach_BCL):
         self.replay_buffer_perc = args.rbuff_size
         self.model_with_gmm_prior_dict = model.state_dict()
 
-        print("Uniform Sampling Coresets")
+        print("Simplified Coresets")
+
+    def get_kl_divergence(self, model1, model2):
+        kl_div = 0
+        task_num = self.current_task
+        for name in self.shared_model_cache["modules_names_without_cls"]:
+            n = name.split(".")
+            if len(n) == 1:
+                model2_ = model2._modules[n[0]]
+                model1_ = model1._modules[n[0]]
+            elif len(n) == 3:
+                model2_ = model2._modules[n[0]]._modules[n[1]]._modules[n[2]]
+                model1_ = model1._modules[n[0]]._modules[n[1]]._modules[n[2]]
+            elif len(n) == 4:
+                model2_ = (
+                    model2._modules[n[0]]._modules[n[1]]._modules[n[2]]._modules[n[3]]
+                )
+                model1_ = (
+                    model1._modules[n[0]]._modules[n[1]]._modules[n[2]]._modules[n[3]]
+                )
+            model1_weight_dist = Normal(model1_.weight.mu, model1_.weight.sigma)
+            model2_weight_dist = Normal(model2_.weight.mu, model2_.weight.sigma)
+            kl_div += torch.distributions.kl.kl_divergence(
+                model1_weight_dist, model2_weight_dist
+            ).sum()
+            if model1_.use_bias and model2_.use_bias:
+                model1_bias_dist = Normal(model1_.bias.mu, model1_.bias.sigma)
+                model2_bias_dist = Normal(model2_.bias.mu, model2_.bias.sigma)
+                kl_div += torch.distributions.kl.kl_divergence(
+                    model1_bias_dist, model2_bias_dist
+                ).sum()
+
+        # Classifier KL Divergence
+        model1_weight_dist = Normal(
+            model1.classifier[task_num].weight.mu,
+            model1.classifier[task_num].weight.sigma,
+        )
+        model2_weight_dist = Normal(
+            model2.classifier[task_num].weight.mu,
+            model2.classifier[task_num].weight.sigma,
+        )
+        kl_div += torch.distributions.kl.kl_divergence(
+            model1_weight_dist, model2_weight_dist
+        ).sum()
+        if model1_.use_bias and model2_.use_bias:
+            model1_bias_dist = Normal(
+                model1.classifier[task_num].bias.mu,
+                model1.classifier[task_num].bias.sigma,
+            )
+            model2_bias_dist = Normal(
+                model2.classifier[task_num].bias.mu,
+                model2.classifier[task_num].bias.sigma,
+            )
+            kl_div += torch.distributions.kl.kl_divergence(
+                model1_bias_dist, model2_bias_dist
+            ).sum()
+        return kl_div
 
     def generate_coreset(self, task_X_, task_y_):
+        last_model = self.shared_model_cache["last_task"]
+        state_dict = (
+            self.model_with_gmm_prior_dict
+            if last_model is None
+            else copy.deepcopy(
+                self.shared_model_cache["models"][last_model].state_dict()
+            )
+        )
         n_ = task_X_.shape[0]
-        coreset_size = int(self.replay_buffer_perc * n_)
-        indices = np.random.choice(n_, coreset_size, replace=False)
+        indices = np.random.choice(n_, n_, replace=False)
         task_X = task_X_[indices]
         task_y = task_y_[indices]
-        self.coresets[self.current_task] = (task_X, task_y)
-        print("Generated Uniform Coreset")
+        coreset_size = int(self.replay_buffer_perc * n_)
+        best_loss = np.inf
+
+        for i in range((n_ // coreset_size) - 1):
+            candidate_indices = list(range(i * coreset_size, (i + 1) * coreset_size))
+            X_subset = task_X[candidate_indices]
+            y_subset = task_y[candidate_indices]
+            model = load_network_with_args()
+            model.load_state_dict(copy.deepcopy(state_dict))
+            stub_model_trained = self.train_stub(model, X_subset, y_subset)
+            kl_div = self.get_kl_divergence(stub_model_trained, self.model)
+            if kl_div < best_loss:
+                best_loss = kl_div
+                self.coresets[self.current_task] = (X_subset, y_subset)
 
     def train_stub(self, model, xtrain, ytrain):
         params_dict = self.get_model_params()
@@ -44,15 +121,12 @@ class Appr(Approach_BCL):
 
     def train(self, task_num, xtrain, ytrain, xvalid, yvalid):
 
-        # Update the next learning rate for each parameter based on their uncertainty
         update_last_task(task_num)
         self.current_task = task_num
         params_dict = self.get_model_params()
         self.optimizer = BayesianSGD(params=params_dict)
 
         best_loss = np.inf
-
-        # best_model=copy.deepcopy(self.model)
         best_model = copy.deepcopy(self.model.state_dict())
         lr = self.init_lr
         patience = self.lr_patience
