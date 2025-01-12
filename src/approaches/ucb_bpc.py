@@ -127,6 +127,7 @@ class Appr(Approach_BCL):
                     b = r[i : i + self.sbatch]
                 else:
                     b = r[i:]
+                b= b.cpu()
                 images, targets = task_X[b].to(self.device), task_y[b].to(self.device)
                 weights = task_weights[b].to(self.device)
 
