@@ -280,11 +280,13 @@ class Appr(Approach_BCL):
                 b = r[i : i + self.sbatch]
             else:
                 b = r[i:]
+            b = b.cpu()
             images, targets = x[b].to(self.device), y[b].to(self.device)
 
             if weights is None:
                 w = None
             else:
+                # b = b.cpu()
                 w = weights[b].to(self.device)
 
             # Forward
