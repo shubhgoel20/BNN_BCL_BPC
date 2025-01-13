@@ -1,0 +1,278 @@
+====================================================================================================
+Arguments =
+	seed: 0
+	device: cuda:0
+	experiment: pmnist
+	approach: ucb_uniform
+	data_path: ../data/
+	output: 
+	checkpoint_dir: ../checkpoints/
+	nepochs: 10
+	sbatch: 64
+	lr: 0.01
+	nlayers: 1
+	nhid: 1200
+	parameter: 
+	rbuff_size: 0.05
+	pseudocoreset: False
+	samples: 10
+	rho: -3.0
+	sig1: 0.0
+	sig2: 6.0
+	pi: 0.25
+	arch: mlp
+	resume: no
+	sti: 0
+====================================================================================================
+Using device: cuda:0
+pmnist_ucb_uniform
+Results will be saved in  ../checkpoints/pmnist_ucb_uniform
+
+
+Starting this run on :
+2025-01-12 17:50
+Load data...
+0,1,2,3,4,5,6,7,8,9,
+Input size = [1, 28, 28] 
+Task info = [(0, 10), (1, 10), (2, 10), (3, 10), (4, 10), (5, 10), (6, 10), (7, 10), (8, 10), (9, 10)]
+Inits...
+----------------------------------------------------------------------------------------------------
+UCB Bayesian Continual Learning
+Uniform Sampling Coresets
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+****************************************************************************************************
+Task  0 (pmnist-0)
+****************************************************************************************************
+| Epoch   1, time=289.4ms/  7.0ms | Train: loss=0.000, acc= 96.1% | Valid: loss=0.000, acc= 96.1% | *
+| Epoch   2, time=337.9ms/  7.3ms | Train: loss=0.000, acc= 97.2% | Valid: loss=0.000, acc= 97.2% | *
+| Epoch   3, time=313.8ms/  7.3ms | Train: loss=0.000, acc= 97.7% | Valid: loss=0.000, acc= 97.7% | *
+| Epoch   4, time=312.3ms/  7.3ms | Train: loss=0.000, acc= 98.2% | Valid: loss=0.000, acc= 98.2% | *
+| Epoch   5, time=314.8ms/  7.1ms | Train: loss=0.000, acc= 98.5% | Valid: loss=0.000, acc= 98.5% | *
+| Epoch   6, time=300.4ms/  7.0ms | Train: loss=0.000, acc= 98.7% | Valid: loss=0.000, acc= 98.7% | *
+| Epoch   7, time=301.9ms/  7.0ms | Train: loss=0.000, acc= 98.8% | Valid: loss=0.000, acc= 98.8% | *
+| Epoch   8, time=302.9ms/  7.0ms | Train: loss=0.000, acc= 99.0% | Valid: loss=0.000, acc= 99.0% | *
+| Epoch   9, time=301.3ms/  7.0ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch  10, time=301.9ms/  7.0ms | Train: loss=0.000, acc= 99.2% | Valid: loss=0.000, acc= 99.2% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - pmnist-0       : loss=0.000, acc=97.800% <<<
+Save at ../checkpoints/pmnist_ucb_uniform
+****************************************************************************************************
+Task  1 (pmnist-1)
+****************************************************************************************************
+| Epoch   1, time=328.2ms/  6.7ms | Train: loss=0.000, acc= 95.7% | Valid: loss=0.000, acc= 95.7% | *
+| Epoch   2, time=316.4ms/  6.7ms | Train: loss=0.000, acc= 97.2% | Valid: loss=0.000, acc= 97.2% | *
+| Epoch   3, time=316.6ms/  6.7ms | Train: loss=0.000, acc= 97.8% | Valid: loss=0.000, acc= 97.8% | *
+| Epoch   4, time=346.1ms/  6.7ms | Train: loss=0.000, acc= 98.2% | Valid: loss=0.000, acc= 98.2% | *
+| Epoch   5, time=316.5ms/  6.7ms | Train: loss=0.000, acc= 98.4% | Valid: loss=0.000, acc= 98.4% | *
+| Epoch   6, time=316.6ms/  6.7ms | Train: loss=0.000, acc= 98.7% | Valid: loss=0.000, acc= 98.7% | *
+| Epoch   7, time=316.6ms/  6.7ms | Train: loss=0.000, acc= 98.9% | Valid: loss=0.000, acc= 98.9% | *
+| Epoch   8, time=317.3ms/  6.7ms | Train: loss=0.000, acc= 99.0% | Valid: loss=0.000, acc= 99.0% | *
+| Epoch   9, time=318.4ms/  6.8ms | Train: loss=0.000, acc= 99.2% | Valid: loss=0.000, acc= 99.2% | *
+| Epoch  10, time=316.3ms/  6.7ms | Train: loss=0.000, acc= 99.3% | Valid: loss=0.000, acc= 99.3% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - pmnist-0       : loss=0.000, acc=97.720% <<<
+>>> Test on task  1 - pmnist-1       : loss=0.000, acc=97.910% <<<
+Save at ../checkpoints/pmnist_ucb_uniform
+****************************************************************************************************
+Task  2 (pmnist-2)
+****************************************************************************************************
+| Epoch   1, time=330.3ms/  6.7ms | Train: loss=0.000, acc= 95.9% | Valid: loss=0.000, acc= 95.9% | *
+| Epoch   2, time=331.4ms/  6.7ms | Train: loss=0.000, acc= 97.2% | Valid: loss=0.000, acc= 97.2% | *
+| Epoch   3, time=332.5ms/  6.7ms | Train: loss=0.000, acc= 97.9% | Valid: loss=0.000, acc= 97.9% | *
+| Epoch   4, time=338.8ms/  6.7ms | Train: loss=0.000, acc= 98.1% | Valid: loss=0.000, acc= 98.1% | *
+| Epoch   5, time=341.6ms/  6.7ms | Train: loss=0.000, acc= 98.4% | Valid: loss=0.000, acc= 98.4% | *
+| Epoch   6, time=332.5ms/  6.7ms | Train: loss=0.000, acc= 98.6% | Valid: loss=0.000, acc= 98.6% | *
+| Epoch   7, time=338.5ms/  6.8ms | Train: loss=0.000, acc= 98.8% | Valid: loss=0.000, acc= 98.8% | *
+| Epoch   8, time=333.9ms/  6.7ms | Train: loss=0.000, acc= 99.0% | Valid: loss=0.000, acc= 99.0% | *
+| Epoch   9, time=341.4ms/  7.1ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch  10, time=348.9ms/  7.1ms | Train: loss=0.000, acc= 99.2% | Valid: loss=0.000, acc= 99.2% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - pmnist-0       : loss=0.000, acc=97.610% <<<
+>>> Test on task  1 - pmnist-1       : loss=0.000, acc=97.770% <<<
+>>> Test on task  2 - pmnist-2       : loss=0.000, acc=97.560% <<<
+Save at ../checkpoints/pmnist_ucb_uniform
+****************************************************************************************************
+Task  3 (pmnist-3)
+****************************************************************************************************
+| Epoch   1, time=353.4ms/  6.8ms | Train: loss=0.000, acc= 96.0% | Valid: loss=0.000, acc= 96.0% | *
+| Epoch   2, time=346.7ms/  6.7ms | Train: loss=0.000, acc= 97.2% | Valid: loss=0.000, acc= 97.2% | *
+| Epoch   3, time=345.8ms/  6.7ms | Train: loss=0.000, acc= 97.8% | Valid: loss=0.000, acc= 97.8% | *
+| Epoch   4, time=348.2ms/  6.7ms | Train: loss=0.000, acc= 98.3% | Valid: loss=0.000, acc= 98.3% | *
+| Epoch   5, time=347.7ms/  6.7ms | Train: loss=0.000, acc= 98.5% | Valid: loss=0.000, acc= 98.5% | *
+| Epoch   6, time=362.4ms/  6.8ms | Train: loss=0.000, acc= 98.7% | Valid: loss=0.000, acc= 98.7% | *
+| Epoch   7, time=347.5ms/  6.7ms | Train: loss=0.000, acc= 98.9% | Valid: loss=0.000, acc= 98.9% | *
+| Epoch   8, time=348.6ms/  6.7ms | Train: loss=0.000, acc= 99.0% | Valid: loss=0.000, acc= 99.0% | *
+| Epoch   9, time=347.6ms/  6.7ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch  10, time=347.7ms/  6.7ms | Train: loss=0.000, acc= 99.2% | Valid: loss=0.000, acc= 99.2% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - pmnist-0       : loss=0.000, acc=97.570% <<<
+>>> Test on task  1 - pmnist-1       : loss=0.000, acc=97.660% <<<
+>>> Test on task  2 - pmnist-2       : loss=0.000, acc=97.580% <<<
+>>> Test on task  3 - pmnist-3       : loss=0.000, acc=97.970% <<<
+Save at ../checkpoints/pmnist_ucb_uniform
+****************************************************************************************************
+Task  4 (pmnist-4)
+****************************************************************************************************
+| Epoch   1, time=360.5ms/  6.6ms | Train: loss=0.000, acc= 95.7% | Valid: loss=0.000, acc= 95.7% | *
+| Epoch   2, time=356.6ms/  6.6ms | Train: loss=0.000, acc= 97.2% | Valid: loss=0.000, acc= 97.2% | *
+| Epoch   3, time=355.3ms/  6.6ms | Train: loss=0.000, acc= 97.7% | Valid: loss=0.000, acc= 97.7% | *
+| Epoch   4, time=378.9ms/  7.0ms | Train: loss=0.000, acc= 98.1% | Valid: loss=0.000, acc= 98.1% | *
+| Epoch   5, time=380.0ms/  7.0ms | Train: loss=0.000, acc= 98.4% | Valid: loss=0.000, acc= 98.4% | *
+| Epoch   6, time=385.8ms/  6.9ms | Train: loss=0.000, acc= 98.6% | Valid: loss=0.000, acc= 98.6% | *
+| Epoch   7, time=363.1ms/  6.6ms | Train: loss=0.000, acc= 98.8% | Valid: loss=0.000, acc= 98.8% | *
+| Epoch   8, time=356.2ms/  6.6ms | Train: loss=0.000, acc= 98.9% | Valid: loss=0.000, acc= 98.9% | *
+| Epoch   9, time=357.2ms/  6.6ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch  10, time=357.4ms/  6.6ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - pmnist-0       : loss=0.000, acc=97.430% <<<
+>>> Test on task  1 - pmnist-1       : loss=0.000, acc=97.580% <<<
+>>> Test on task  2 - pmnist-2       : loss=0.000, acc=97.480% <<<
+>>> Test on task  3 - pmnist-3       : loss=0.000, acc=97.780% <<<
+>>> Test on task  4 - pmnist-4       : loss=0.000, acc=97.930% <<<
+Save at ../checkpoints/pmnist_ucb_uniform
+****************************************************************************************************
+Task  5 (pmnist-5)
+****************************************************************************************************
+| Epoch   1, time=372.5ms/  6.6ms | Train: loss=0.000, acc= 95.7% | Valid: loss=0.000, acc= 95.7% | *
+| Epoch   2, time=372.6ms/  6.6ms | Train: loss=0.000, acc= 97.3% | Valid: loss=0.000, acc= 97.3% | *
+| Epoch   3, time=372.6ms/  6.6ms | Train: loss=0.000, acc= 97.9% | Valid: loss=0.000, acc= 97.9% | *
+| Epoch   4, time=372.6ms/  6.6ms | Train: loss=0.000, acc= 98.2% | Valid: loss=0.000, acc= 98.2% | *
+| Epoch   5, time=372.5ms/  6.6ms | Train: loss=0.000, acc= 98.4% | Valid: loss=0.000, acc= 98.4% | *
+| Epoch   6, time=376.6ms/  6.6ms | Train: loss=0.000, acc= 98.7% | Valid: loss=0.000, acc= 98.7% | *
+| Epoch   7, time=375.3ms/  6.6ms | Train: loss=0.000, acc= 98.9% | Valid: loss=0.000, acc= 98.9% | *
+| Epoch   8, time=372.5ms/  6.6ms | Train: loss=0.000, acc= 99.0% | Valid: loss=0.000, acc= 99.0% | *
+| Epoch   9, time=372.5ms/  6.6ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch  10, time=372.6ms/  6.6ms | Train: loss=0.000, acc= 99.2% | Valid: loss=0.000, acc= 99.2% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - pmnist-0       : loss=0.000, acc=97.400% <<<
+>>> Test on task  1 - pmnist-1       : loss=0.000, acc=97.620% <<<
+>>> Test on task  2 - pmnist-2       : loss=0.000, acc=97.370% <<<
+>>> Test on task  3 - pmnist-3       : loss=0.000, acc=97.720% <<<
+>>> Test on task  4 - pmnist-4       : loss=0.000, acc=97.770% <<<
+>>> Test on task  5 - pmnist-5       : loss=0.000, acc=97.850% <<<
+Save at ../checkpoints/pmnist_ucb_uniform
+****************************************************************************************************
+Task  6 (pmnist-6)
+****************************************************************************************************
+| Epoch   1, time=387.8ms/  6.6ms | Train: loss=0.000, acc= 95.8% | Valid: loss=0.000, acc= 95.8% | *
+| Epoch   2, time=387.2ms/  6.6ms | Train: loss=0.000, acc= 97.3% | Valid: loss=0.000, acc= 97.3% | *
+| Epoch   3, time=388.0ms/  6.6ms | Train: loss=0.000, acc= 97.8% | Valid: loss=0.000, acc= 97.8% | *
+| Epoch   4, time=387.9ms/  6.6ms | Train: loss=0.000, acc= 98.2% | Valid: loss=0.000, acc= 98.2% | *
+| Epoch   5, time=391.9ms/  6.7ms | Train: loss=0.000, acc= 98.5% | Valid: loss=0.000, acc= 98.5% | *
+| Epoch   6, time=397.9ms/  6.6ms | Train: loss=0.000, acc= 98.7% | Valid: loss=0.000, acc= 98.7% | *
+| Epoch   7, time=387.5ms/  6.6ms | Train: loss=0.000, acc= 98.9% | Valid: loss=0.000, acc= 98.9% | *
+| Epoch   8, time=387.9ms/  6.6ms | Train: loss=0.000, acc= 99.0% | Valid: loss=0.000, acc= 99.0% | *
+| Epoch   9, time=388.0ms/  6.6ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch  10, time=387.5ms/  6.6ms | Train: loss=0.000, acc= 99.2% | Valid: loss=0.000, acc= 99.2% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - pmnist-0       : loss=0.000, acc=97.380% <<<
+>>> Test on task  1 - pmnist-1       : loss=0.000, acc=97.520% <<<
+>>> Test on task  2 - pmnist-2       : loss=0.000, acc=97.270% <<<
+>>> Test on task  3 - pmnist-3       : loss=0.000, acc=97.570% <<<
+>>> Test on task  4 - pmnist-4       : loss=0.000, acc=97.730% <<<
+>>> Test on task  5 - pmnist-5       : loss=0.000, acc=97.770% <<<
+>>> Test on task  6 - pmnist-6       : loss=0.000, acc=97.980% <<<
+Save at ../checkpoints/pmnist_ucb_uniform
+****************************************************************************************************
+Task  7 (pmnist-7)
+****************************************************************************************************
+| Epoch   1, time=403.3ms/  6.6ms | Train: loss=0.000, acc= 96.0% | Valid: loss=0.000, acc= 96.0% | *
+| Epoch   2, time=402.2ms/  6.6ms | Train: loss=0.000, acc= 97.3% | Valid: loss=0.000, acc= 97.3% | *
+| Epoch   3, time=402.2ms/  6.9ms | Train: loss=0.000, acc= 97.8% | Valid: loss=0.000, acc= 97.8% | *
+| Epoch   4, time=402.1ms/  6.6ms | Train: loss=0.000, acc= 98.2% | Valid: loss=0.000, acc= 98.2% | *
+| Epoch   5, time=430.3ms/  6.8ms | Train: loss=0.000, acc= 98.4% | Valid: loss=0.000, acc= 98.4% | *
+| Epoch   6, time=419.2ms/  7.0ms | Train: loss=0.000, acc= 98.6% | Valid: loss=0.000, acc= 98.6% | *
+| Epoch   7, time=415.9ms/  6.7ms | Train: loss=0.000, acc= 98.9% | Valid: loss=0.000, acc= 98.9% | *
+| Epoch   8, time=409.6ms/  6.8ms | Train: loss=0.000, acc= 99.0% | Valid: loss=0.000, acc= 99.0% | *
+| Epoch   9, time=410.9ms/  6.7ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch  10, time=410.0ms/  6.7ms | Train: loss=0.000, acc= 99.2% | Valid: loss=0.000, acc= 99.2% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - pmnist-0       : loss=0.000, acc=97.350% <<<
+>>> Test on task  1 - pmnist-1       : loss=0.000, acc=97.410% <<<
+>>> Test on task  2 - pmnist-2       : loss=0.000, acc=97.120% <<<
+>>> Test on task  3 - pmnist-3       : loss=0.000, acc=97.560% <<<
+>>> Test on task  4 - pmnist-4       : loss=0.000, acc=97.630% <<<
+>>> Test on task  5 - pmnist-5       : loss=0.000, acc=97.670% <<<
+>>> Test on task  6 - pmnist-6       : loss=0.000, acc=97.670% <<<
+>>> Test on task  7 - pmnist-7       : loss=0.000, acc=97.880% <<<
+Save at ../checkpoints/pmnist_ucb_uniform
+****************************************************************************************************
+Task  8 (pmnist-8)
+****************************************************************************************************
+| Epoch   1, time=425.0ms/  6.6ms | Train: loss=0.000, acc= 95.9% | Valid: loss=0.000, acc= 95.9% | *
+| Epoch   2, time=417.1ms/  6.6ms | Train: loss=0.000, acc= 97.1% | Valid: loss=0.000, acc= 97.1% | *
+| Epoch   3, time=417.5ms/  6.6ms | Train: loss=0.000, acc= 97.8% | Valid: loss=0.000, acc= 97.8% | *
+| Epoch   4, time=431.6ms/  6.8ms | Train: loss=0.000, acc= 98.2% | Valid: loss=0.000, acc= 98.2% | *
+| Epoch   5, time=428.0ms/  6.7ms | Train: loss=0.000, acc= 98.5% | Valid: loss=0.000, acc= 98.5% | *
+| Epoch   6, time=425.8ms/  6.7ms | Train: loss=0.000, acc= 98.7% | Valid: loss=0.000, acc= 98.7% | *
+| Epoch   7, time=430.4ms/  6.7ms | Train: loss=0.000, acc= 98.9% | Valid: loss=0.000, acc= 98.9% | *
+| Epoch   8, time=435.2ms/  6.8ms | Train: loss=0.000, acc= 99.0% | Valid: loss=0.000, acc= 99.0% | *
+| Epoch   9, time=439.7ms/  6.7ms | Train: loss=0.000, acc= 99.2% | Valid: loss=0.000, acc= 99.2% | *
+| Epoch  10, time=428.8ms/  6.7ms | Train: loss=0.000, acc= 99.2% | Valid: loss=0.000, acc= 99.2% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - pmnist-0       : loss=0.000, acc=97.330% <<<
+>>> Test on task  1 - pmnist-1       : loss=0.000, acc=97.420% <<<
+>>> Test on task  2 - pmnist-2       : loss=0.000, acc=96.950% <<<
+>>> Test on task  3 - pmnist-3       : loss=0.000, acc=97.580% <<<
+>>> Test on task  4 - pmnist-4       : loss=0.000, acc=97.470% <<<
+>>> Test on task  5 - pmnist-5       : loss=0.000, acc=97.530% <<<
+>>> Test on task  6 - pmnist-6       : loss=0.000, acc=97.610% <<<
+>>> Test on task  7 - pmnist-7       : loss=0.000, acc=97.500% <<<
+>>> Test on task  8 - pmnist-8       : loss=0.000, acc=97.930% <<<
+Save at ../checkpoints/pmnist_ucb_uniform
+****************************************************************************************************
+Task  9 (pmnist-9)
+****************************************************************************************************
+| Epoch   1, time=443.3ms/  6.8ms | Train: loss=0.000, acc= 95.7% | Valid: loss=0.000, acc= 95.7% | *
+| Epoch   2, time=454.8ms/  6.8ms | Train: loss=0.000, acc= 97.3% | Valid: loss=0.000, acc= 97.3% | *
+| Epoch   3, time=444.3ms/  6.7ms | Train: loss=0.000, acc= 97.8% | Valid: loss=0.000, acc= 97.8% | *
+| Epoch   4, time=441.8ms/  6.7ms | Train: loss=0.000, acc= 98.2% | Valid: loss=0.000, acc= 98.2% | *
+| Epoch   5, time=441.5ms/  6.7ms | Train: loss=0.000, acc= 98.5% | Valid: loss=0.000, acc= 98.5% | *
+| Epoch   6, time=440.9ms/  6.7ms | Train: loss=0.000, acc= 98.6% | Valid: loss=0.000, acc= 98.6% | *
+| Epoch   7, time=440.6ms/  6.7ms | Train: loss=0.000, acc= 98.8% | Valid: loss=0.000, acc= 98.8% | *
+| Epoch   8, time=444.3ms/  6.7ms | Train: loss=0.000, acc= 98.9% | Valid: loss=0.000, acc= 98.9% | *
+| Epoch   9, time=442.9ms/  6.7ms | Train: loss=0.000, acc= 99.1% | Valid: loss=0.000, acc= 99.1% | *
+| Epoch  10, time=449.4ms/  7.1ms | Train: loss=0.000, acc= 99.2% | Valid: loss=0.000, acc= 99.2% | *
+Generated Uniform Coreset
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - pmnist-0       : loss=0.000, acc=97.350% <<<
+>>> Test on task  1 - pmnist-1       : loss=0.000, acc=97.390% <<<
+>>> Test on task  2 - pmnist-2       : loss=0.000, acc=96.920% <<<
+>>> Test on task  3 - pmnist-3       : loss=0.000, acc=97.540% <<<
+>>> Test on task  4 - pmnist-4       : loss=0.000, acc=97.280% <<<
+>>> Test on task  5 - pmnist-5       : loss=0.000, acc=97.490% <<<
+>>> Test on task  6 - pmnist-6       : loss=0.000, acc=97.530% <<<
+>>> Test on task  7 - pmnist-7       : loss=0.000, acc=97.540% <<<
+>>> Test on task  8 - pmnist-8       : loss=0.000, acc=97.870% <<<
+>>> Test on task  9 - pmnist-9       : loss=0.000, acc=97.830% <<<
+Save at ../checkpoints/pmnist_ucb_uniform
+****************************************************************************************************
+Accuracies =
+	,0.9780% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.9772% ,0.9791% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.9761% ,0.9777% ,0.9756% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.9757% ,0.9766% ,0.9758% ,0.9797% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.9743% ,0.9758% ,0.9748% ,0.9778% ,0.9793% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.9740% ,0.9762% ,0.9737% ,0.9772% ,0.9777% ,0.9785% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.9738% ,0.9752% ,0.9727% ,0.9757% ,0.9773% ,0.9777% ,0.9798% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.9735% ,0.9741% ,0.9712% ,0.9756% ,0.9763% ,0.9767% ,0.9767% ,0.9788% ,0.0000% ,0.0000% ,
+	,0.9733% ,0.9742% ,0.9695% ,0.9758% ,0.9747% ,0.9753% ,0.9761% ,0.9750% ,0.9793% ,0.0000% ,
+	,0.9735% ,0.9739% ,0.9692% ,0.9754% ,0.9728% ,0.9749% ,0.9753% ,0.9754% ,0.9787% ,0.9783% ,
+ACC: 0.9747%
+
+
+BWT : -0.00%
+****************************************************************************************************
+Done!
+Log file saved in  ../checkpoints/pmnist_ucb_uniform/pmnist_ucb_uniform_seed_0.p
+[Elapsed time = 10.2 h]
