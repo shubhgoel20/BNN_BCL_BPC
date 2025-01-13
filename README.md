@@ -49,7 +49,7 @@ In general to run any of the experiments, the following command can be used. Any
 
 #### Running `pmnist` with `ucb_bpc` for `10` epochs using Bayesian  Coresets
 
-`python src/run.py --experiment mnist5 --approach ucb_bpc --nepochs 10`
+`python src/run.py --experiment pmnist --approach ucb_bpc --nepochs 10`
 
 #### Running `cifar` with `ucb_uniform_full` for `20` epochs using Bayesian  Coresets
 
