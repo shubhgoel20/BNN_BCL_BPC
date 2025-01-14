@@ -6,12 +6,10 @@ def generate_plot(experiment_name):
 
     data_dict, approach_data = get_info(experiment_name)
 
-    # Determine the number of tasks (columns in the matrix)
     num_tasks = data_dict['N']
 
-    # Plot configuration: Arrange up to 5 plots per row
     plots_per_row = 5
-    rows = data_dict['M'] // plots_per_row
+    rows = num_tasks // plots_per_row if num_tasks > plots_per_row else 1
 
     fig, axes = plt.subplots(rows, plots_per_row, figsize=(15, 5 * rows), squeeze=False)
 
@@ -28,7 +26,6 @@ def generate_plot(experiment_name):
                 if accuracy != 0:
                     times.append(time_step)
                     accuracies.append(accuracy)
-            # ax.plot(times, accuracies, marker='o', label=f'{key}')
             ax.plot(times, accuracies, linestyle=line_styles[exp_idx % len(line_styles)], marker=markers[exp_idx % len(markers)], label=key)
         
         ax.set_title(f'Task {task_idx}')
@@ -36,7 +33,6 @@ def generate_plot(experiment_name):
         ax.set_ylabel('Accuracy')
         ax.set_xticks(range(experiment_data.shape[0]))
         ax.grid(True)
-        # ax.legend()
 
     # Hide unused subplots
     for i in range(num_tasks, rows * plots_per_row):
