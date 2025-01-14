@@ -8,7 +8,7 @@ def generate_plot(experiment_name, skip_approaches):
 
     num_tasks = data_dict['N']
 
-    skip_approaches = skip_approaches.split(",")
+    skip_approaches = skip_approaches.split(",") if len(skip_approaches) else []
     data_dict["M"] -= len(skip_approaches)
 
     plots_per_row = 5
