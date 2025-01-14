@@ -17,10 +17,10 @@ pip install -r requirements.txt
 ### Experiments:
 
 The following expreimental tasks (`--experiment`) can be chosen from:
-* MNIST2: `TODO`
-* MNIST5: `TODO`
-* CIFAR: `TODO`
-* PMNIST: `TODO`
+* MNIST2: `mnist2`
+* MNIST5: `mnist5`
+* CIFAR: `cifar`
+* PMNIST: `pmnist`
 
 ### Approaches:
 
@@ -31,7 +31,7 @@ The following approaches (`--approach`) are present in the repositories. For oth
 * Uniform Sampling per Epoch (`ucb_uniform_full`) : We build on top of the BCL approach and uniformly sample a set of inputs from a randomly selected task from one of the previous tasks at each epoch. The size of the sample can be controlled by adjusting `--rbuff_size` parameter of `run.py`. This is a percentage value, expressed as a `float`.
 * Simplified Bayesian Coresets (`ucb_simplified_coresets`) : We build on top of the BCL approach and select several batches of the current task inputs and minimize the reverse KL-divergence between posterior of the data sample and the entire dataset. The batch obtained this way serves as the coreset for training of subsequent tasks.
 * Uniform Sampling Coresets (`ucb_uniform`) : We build on top of the BCL approach and select a batch of images uniformly from inputs of the current task. The batch obtained serves as the coreset for training of subsequent tasks.
-* Uniform Bayesian Coresets and Pseudocoresets (`ucb_bpc`) : `TODO`
+* Uniform Bayesian Coresets and Pseudocoresets (`ucb_bpc`) : We build on top of the BCL approach and generate Bayesian Coresets or Pseudocoresets (`--pseudocoreset True`) for training of subsequent tasks.
 
 ### Example Commands:
 
