@@ -34,8 +34,10 @@ def generate_plot(experiment_name, skip_approaches):
             ax.plot(times, accuracies, linestyle=line_styles[exp_idx % len(line_styles)], marker=markers[exp_idx % len(markers)], label=key)
         
         ax.set_title(f'Task {task_idx}')
-        ax.set_xlabel('Tasks')
-        ax.set_ylabel('Accuracy')
+        if row == rows-1:
+            ax.set_xlabel('Tasks')
+        if col == 0:
+            ax.set_ylabel('Accuracy')
         ax.set_xticks(range(experiment_data.shape[0]))
         ax.grid(True)
 
@@ -46,12 +48,13 @@ def generate_plot(experiment_name, skip_approaches):
 
     handles, labels = axes[0, 0].get_legend_handles_labels()
     fig.legend(handles, labels, loc='upper center', ncol=data_dict['M'])
-
-    plt.tight_layout(rect=[0, 0, 1, 0.95])
-    plot_name = f'plots/{experiment_name}.jpg'
+    
+    plt.tight_layout(h_pad=0, w_pad=1, rect=[0, 0, 1, 0.95])
+    plt.subplots_adjust(bottom=0.1)
+    plot_name = f'plots/{experiment_name}.pdf'
     if len(skip_approaches):
-        plot_name = f'plots/{experiment_name}_SKIP_{"_".join(skip_approaches)}.jpg'
-    plt.savefig(plot_name, format='jpg')
+        plot_name = f'plots/{experiment_name}_SKIP_{"_".join(skip_approaches)}.pdf'
+    plt.savefig(plot_name, format='pdf')
     plt.close()
 
 if __name__ == "__main__":
