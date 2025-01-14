@@ -35,6 +35,7 @@ def generate_plot(experiment_name):
         ax.set_xlabel('Tasks')
         ax.set_ylabel('Accuracy')
         ax.set_xticks(range(experiment_data.shape[0]))
+        ax.grid(True)
         # ax.legend()
 
     # Hide unused subplots
