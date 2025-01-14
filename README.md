@@ -19,7 +19,7 @@ pip install -r requirements.txt
 The following expreimental tasks (`--experiment`) can be chosen from:
 * MNIST2: `mnist2`
 * MNIST5: `mnist5`
-* CIFAR: `cifar`
+* SplitCIFAR: `cifar`
 * PMNIST: `pmnist`
 
 ### Approaches:
