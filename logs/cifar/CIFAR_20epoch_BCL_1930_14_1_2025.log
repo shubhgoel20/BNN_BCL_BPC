@@ -1,0 +1,367 @@
+====================================================================================================
+Arguments =
+	seed: 0
+	device: cuda:0
+	experiment: cifar
+	approach: ucb_bcl
+	data_path: ../data/
+	output: 
+	checkpoint_dir: ../checkpoints/
+	nepochs: 20
+	sbatch: 64
+	lr: 0.01
+	nlayers: 1
+	nhid: 1200
+	parameter: 
+	rbuff_size: 0.05
+	pseudocoreset: False
+	samples: 10
+	rho: -3.0
+	sig1: 0.0
+	sig2: 6.0
+	pi: 0.25
+	arch: mlp
+	resume: no
+	sti: 0
+====================================================================================================
+Using device: cuda:0
+cifar_ucb_bcl
+Results will be saved in  ../checkpoints/cifar_ucb_bcl
+
+
+Starting this run on :
+2025-01-13 10:16
+Load data...
+Task order = [2, 8, 4, 9, 1, 6, 7, 3, 0, 5]
+Input size = [3, 32, 32] 
+Task info = [(0, 2), (1, 20), (2, 2), (3, 20), (4, 2), (5, 20), (6, 20), (7, 2), (8, 2), (9, 20)]
+Inits...
+----------------------------------------------------------------------------------------------------
+UCB Bayesian Continual Learning
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+****************************************************************************************************
+Task  0 (cifar10-2)
+****************************************************************************************************
+| Epoch   1, time=2355.5ms/ 62.3ms | Train: loss=0.000, acc= 49.9% | Valid: loss=0.000, acc= 50.7% | *
+| Epoch   2, time=2153.2ms/ 62.9ms | Train: loss=0.000, acc= 50.1% | Valid: loss=0.000, acc= 50.8% |
+| Epoch   3, time=2464.7ms/ 75.9ms | Train: loss=0.000, acc= 54.1% | Valid: loss=0.000, acc= 54.8% |
+| Epoch   4, time=2609.6ms/ 75.6ms | Train: loss=0.000, acc= 62.4% | Valid: loss=0.000, acc= 62.2% |
+| Epoch   5, time=2647.6ms/ 71.2ms | Train: loss=0.000, acc= 62.8% | Valid: loss=0.000, acc= 62.5% |
+| Epoch   6, time=2673.6ms/ 76.4ms | Train: loss=0.000, acc= 66.2% | Valid: loss=0.000, acc= 65.3% | lr=3.3e-03
+| Epoch   7, time=2365.5ms/ 68.6ms | Train: loss=0.000, acc= 68.7% | Valid: loss=0.000, acc= 69.1% | *
+| Epoch   8, time=2659.8ms/ 74.5ms | Train: loss=0.000, acc= 69.1% | Valid: loss=0.000, acc= 69.3% | *
+| Epoch   9, time=2760.4ms/ 76.0ms | Train: loss=0.000, acc= 67.1% | Valid: loss=0.000, acc= 66.2% |
+| Epoch  10, time=2653.6ms/ 78.5ms | Train: loss=0.000, acc= 78.4% | Valid: loss=0.000, acc= 79.8% | *
+| Epoch  11, time=2650.4ms/ 75.9ms | Train: loss=0.000, acc= 78.0% | Valid: loss=0.000, acc= 78.6% |
+| Epoch  12, time=2624.0ms/ 75.8ms | Train: loss=0.000, acc= 79.9% | Valid: loss=0.000, acc= 80.7% | *
+| Epoch  13, time=2607.1ms/ 76.1ms | Train: loss=0.000, acc= 77.5% | Valid: loss=0.000, acc= 78.0% |
+| Epoch  14, time=2618.0ms/ 76.1ms | Train: loss=0.000, acc= 75.4% | Valid: loss=0.000, acc= 75.6% |
+| Epoch  15, time=2346.1ms/ 66.0ms | Train: loss=0.000, acc= 78.4% | Valid: loss=0.000, acc= 79.2% |
+| Epoch  16, time=2540.6ms/ 76.1ms | Train: loss=0.000, acc= 80.4% | Valid: loss=0.000, acc= 80.1% |
+| Epoch  17, time=2579.6ms/ 66.7ms | Train: loss=0.000, acc= 80.3% | Valid: loss=0.000, acc= 82.3% | lr=1.1e-03
+| Epoch  18, time=2262.6ms/ 66.7ms | Train: loss=0.000, acc= 78.5% | Valid: loss=0.000, acc= 77.7% |
+| Epoch  19, time=2626.6ms/ 76.4ms | Train: loss=0.000, acc= 81.5% | Valid: loss=0.000, acc= 82.0% | *
+| Epoch  20, time=2613.9ms/ 76.1ms | Train: loss=0.000, acc= 82.9% | Valid: loss=0.000, acc= 83.1% | *
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - cifar10-2      : loss=0.000, acc=82.700% <<<
+Save at ../checkpoints/cifar_ucb_bcl
+****************************************************************************************************
+Task  1 (cifar100-3)
+****************************************************************************************************
+| Epoch   1, time=3290.1ms/ 75.9ms | Train: loss=0.001, acc= 10.9% | Valid: loss=0.001, acc= 11.4% | *
+| Epoch   2, time=3275.5ms/ 76.0ms | Train: loss=0.001, acc= 12.7% | Valid: loss=0.001, acc= 12.4% | *
+| Epoch   3, time=3275.6ms/ 76.1ms | Train: loss=0.001, acc= 13.6% | Valid: loss=0.001, acc= 13.0% | *
+| Epoch   4, time=3286.1ms/ 76.1ms | Train: loss=0.001, acc= 15.2% | Valid: loss=0.001, acc= 15.6% | *
+| Epoch   5, time=3298.2ms/ 76.1ms | Train: loss=0.001, acc= 15.7% | Valid: loss=0.001, acc= 14.7% | *
+| Epoch   6, time=3347.4ms/ 75.8ms | Train: loss=0.001, acc= 13.9% | Valid: loss=0.001, acc= 15.0% |
+| Epoch   7, time=3298.1ms/ 75.7ms | Train: loss=0.001, acc= 18.2% | Valid: loss=0.001, acc= 17.8% | *
+| Epoch   8, time=3287.5ms/ 75.6ms | Train: loss=0.001, acc= 16.9% | Valid: loss=0.001, acc= 17.5% |
+| Epoch   9, time=3294.9ms/ 75.9ms | Train: loss=0.001, acc= 19.8% | Valid: loss=0.001, acc= 18.4% | *
+| Epoch  10, time=3309.4ms/ 76.0ms | Train: loss=0.001, acc= 21.3% | Valid: loss=0.001, acc= 21.1% |
+| Epoch  11, time=3292.5ms/ 75.6ms | Train: loss=0.001, acc= 24.8% | Valid: loss=0.001, acc= 24.2% | *
+| Epoch  12, time=3298.0ms/ 75.7ms | Train: loss=0.001, acc= 24.7% | Valid: loss=0.001, acc= 24.0% | *
+| Epoch  13, time=3300.5ms/ 70.3ms | Train: loss=0.001, acc= 27.9% | Valid: loss=0.001, acc= 27.2% | *
+| Epoch  14, time=2823.3ms/ 63.3ms | Train: loss=0.001, acc= 27.6% | Valid: loss=0.001, acc= 26.5% | *
+| Epoch  15, time=2679.9ms/ 63.3ms | Train: loss=0.001, acc= 28.2% | Valid: loss=0.001, acc= 27.8% | *
+| Epoch  16, time=2749.1ms/ 64.3ms | Train: loss=0.001, acc= 30.5% | Valid: loss=0.001, acc= 28.2% | *
+| Epoch  17, time=2856.1ms/ 77.1ms | Train: loss=0.001, acc= 33.0% | Valid: loss=0.001, acc= 31.8% | *
+| Epoch  18, time=2913.2ms/ 68.8ms | Train: loss=0.001, acc= 33.1% | Valid: loss=0.001, acc= 32.3% |
+| Epoch  19, time=2879.9ms/ 68.5ms | Train: loss=0.001, acc= 35.8% | Valid: loss=0.001, acc= 34.7% | *
+| Epoch  20, time=3410.0ms/ 76.4ms | Train: loss=0.001, acc= 35.6% | Valid: loss=0.001, acc= 34.1% |
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - cifar10-2      : loss=0.000, acc=56.600% <<<
+>>> Test on task  1 - cifar100-3     : loss=0.001, acc=35.400% <<<
+Save at ../checkpoints/cifar_ucb_bcl
+****************************************************************************************************
+Task  2 (cifar10-4)
+****************************************************************************************************
+| Epoch   1, time=3366.3ms/ 75.9ms | Train: loss=0.000, acc= 80.6% | Valid: loss=0.000, acc= 78.3% | *
+| Epoch   2, time=3302.8ms/ 72.4ms | Train: loss=0.000, acc= 83.5% | Valid: loss=0.000, acc= 82.2% | *
+| Epoch   3, time=3380.4ms/ 77.3ms | Train: loss=0.000, acc= 84.5% | Valid: loss=0.000, acc= 83.4% | *
+| Epoch   4, time=3341.3ms/ 76.2ms | Train: loss=0.000, acc= 86.7% | Valid: loss=0.000, acc= 85.6% | *
+| Epoch   5, time=3287.3ms/ 72.6ms | Train: loss=0.000, acc= 86.8% | Valid: loss=0.000, acc= 85.8% | *
+| Epoch   6, time=3332.3ms/ 76.0ms | Train: loss=0.000, acc= 88.5% | Valid: loss=0.000, acc= 87.4% | *
+| Epoch   7, time=3324.0ms/ 76.0ms | Train: loss=0.000, acc= 88.8% | Valid: loss=0.000, acc= 87.6% | *
+| Epoch   8, time=3232.7ms/ 67.3ms | Train: loss=0.000, acc= 89.7% | Valid: loss=0.000, acc= 88.2% | *
+| Epoch   9, time=3332.8ms/ 70.1ms | Train: loss=0.000, acc= 89.8% | Valid: loss=0.000, acc= 89.9% | *
+| Epoch  10, time=3163.7ms/ 76.5ms | Train: loss=0.000, acc= 86.1% | Valid: loss=0.000, acc= 84.6% |
+| Epoch  11, time=3049.8ms/ 76.1ms | Train: loss=0.000, acc= 90.7% | Valid: loss=0.000, acc= 90.2% | *
+| Epoch  12, time=3113.2ms/ 65.5ms | Train: loss=0.000, acc= 89.4% | Valid: loss=0.000, acc= 89.2% |
+| Epoch  13, time=2676.3ms/ 62.8ms | Train: loss=0.000, acc= 90.9% | Valid: loss=0.000, acc= 90.3% | *
+| Epoch  14, time=2636.6ms/ 62.6ms | Train: loss=0.000, acc= 91.4% | Valid: loss=0.000, acc= 90.9% | *
+| Epoch  15, time=3046.1ms/ 76.2ms | Train: loss=0.000, acc= 91.0% | Valid: loss=0.000, acc= 90.6% |
+| Epoch  16, time=3364.1ms/ 76.5ms | Train: loss=0.000, acc= 92.3% | Valid: loss=0.000, acc= 90.8% | *
+| Epoch  17, time=3049.2ms/ 69.8ms | Train: loss=0.000, acc= 90.3% | Valid: loss=0.000, acc= 90.5% |
+| Epoch  18, time=3196.0ms/ 67.8ms | Train: loss=0.000, acc= 92.4% | Valid: loss=0.000, acc= 91.5% | *
+| Epoch  19, time=2697.4ms/ 62.9ms | Train: loss=0.000, acc= 92.1% | Valid: loss=0.000, acc= 91.7% |
+| Epoch  20, time=2627.8ms/ 65.8ms | Train: loss=0.000, acc= 91.3% | Valid: loss=0.000, acc= 91.0% |
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - cifar10-2      : loss=0.000, acc=49.800% <<<
+>>> Test on task  1 - cifar100-3     : loss=0.001, acc=15.300% <<<
+>>> Test on task  2 - cifar10-4      : loss=0.000, acc=91.000% <<<
+Save at ../checkpoints/cifar_ucb_bcl
+****************************************************************************************************
+Task  3 (cifar100-4)
+****************************************************************************************************
+| Epoch   1, time=3039.7ms/ 63.5ms | Train: loss=0.001, acc= 16.8% | Valid: loss=0.001, acc= 18.1% | *
+| Epoch   2, time=2736.1ms/ 66.0ms | Train: loss=0.001, acc= 21.1% | Valid: loss=0.001, acc= 19.6% | *
+| Epoch   3, time=3233.2ms/ 70.5ms | Train: loss=0.001, acc= 21.5% | Valid: loss=0.001, acc= 20.6% | *
+| Epoch   4, time=3053.0ms/ 69.8ms | Train: loss=0.001, acc= 25.2% | Valid: loss=0.001, acc= 27.8% | *
+| Epoch   5, time=3533.8ms/ 80.3ms | Train: loss=0.001, acc= 27.1% | Valid: loss=0.001, acc= 28.3% | *
+| Epoch   6, time=3225.3ms/ 76.3ms | Train: loss=0.001, acc= 26.3% | Valid: loss=0.001, acc= 26.6% |
+| Epoch   7, time=3206.9ms/ 67.7ms | Train: loss=0.001, acc= 30.9% | Valid: loss=0.001, acc= 31.1% | *
+| Epoch   8, time=2932.4ms/ 67.5ms | Train: loss=0.001, acc= 32.0% | Valid: loss=0.001, acc= 31.7% | *
+| Epoch   9, time=3313.6ms/ 77.4ms | Train: loss=0.001, acc= 33.9% | Valid: loss=0.001, acc= 34.4% | *
+| Epoch  10, time=3180.2ms/ 66.8ms | Train: loss=0.001, acc= 37.4% | Valid: loss=0.001, acc= 37.2% | *
+| Epoch  11, time=2936.1ms/ 64.8ms | Train: loss=0.001, acc= 34.4% | Valid: loss=0.001, acc= 34.8% |
+| Epoch  12, time=2728.6ms/ 63.2ms | Train: loss=0.001, acc= 38.2% | Valid: loss=0.001, acc= 38.5% | *
+| Epoch  13, time=2704.6ms/ 63.6ms | Train: loss=0.001, acc= 37.9% | Valid: loss=0.001, acc= 37.0% |
+| Epoch  14, time=2861.2ms/ 78.5ms | Train: loss=0.001, acc= 37.4% | Valid: loss=0.001, acc= 38.4% |
+| Epoch  15, time=3227.1ms/ 63.5ms | Train: loss=0.001, acc= 37.8% | Valid: loss=0.001, acc= 37.5% |
+| Epoch  16, time=3136.2ms/ 77.1ms | Train: loss=0.001, acc= 41.3% | Valid: loss=0.001, acc= 39.6% | *
+| Epoch  17, time=3369.5ms/ 77.3ms | Train: loss=0.001, acc= 41.1% | Valid: loss=0.001, acc= 38.6% |
+| Epoch  18, time=3015.1ms/ 66.0ms | Train: loss=0.001, acc= 41.1% | Valid: loss=0.001, acc= 39.3% |
+| Epoch  19, time=3313.5ms/ 76.7ms | Train: loss=0.001, acc= 42.3% | Valid: loss=0.001, acc= 41.8% | *
+| Epoch  20, time=3338.1ms/ 76.1ms | Train: loss=0.001, acc= 42.3% | Valid: loss=0.001, acc= 40.9% |
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - cifar10-2      : loss=0.000, acc=58.100% <<<
+>>> Test on task  1 - cifar100-3     : loss=0.001, acc=17.300% <<<
+>>> Test on task  2 - cifar10-4      : loss=0.000, acc=56.550% <<<
+>>> Test on task  3 - cifar100-4     : loss=0.001, acc=38.800% <<<
+Save at ../checkpoints/cifar_ucb_bcl
+****************************************************************************************************
+Task  4 (cifar10-1)
+****************************************************************************************************
+| Epoch   1, time=3301.4ms/ 76.1ms | Train: loss=0.000, acc= 72.8% | Valid: loss=0.000, acc= 72.0% | *
+| Epoch   2, time=3340.7ms/ 76.3ms | Train: loss=0.000, acc= 74.1% | Valid: loss=0.000, acc= 72.9% | *
+| Epoch   3, time=3329.5ms/ 76.2ms | Train: loss=0.000, acc= 75.8% | Valid: loss=0.000, acc= 74.6% | *
+| Epoch   4, time=3308.2ms/ 75.6ms | Train: loss=0.000, acc= 75.9% | Valid: loss=0.000, acc= 76.5% | *
+| Epoch   5, time=3076.0ms/ 63.0ms | Train: loss=0.000, acc= 76.4% | Valid: loss=0.000, acc= 75.6% |
+| Epoch   6, time=2729.0ms/ 66.0ms | Train: loss=0.000, acc= 78.5% | Valid: loss=0.000, acc= 77.4% | *
+| Epoch   7, time=2660.3ms/ 62.7ms | Train: loss=0.000, acc= 79.0% | Valid: loss=0.000, acc= 78.5% | *
+| Epoch   8, time=2639.1ms/ 62.8ms | Train: loss=0.000, acc= 78.8% | Valid: loss=0.000, acc= 77.9% | *
+| Epoch   9, time=2637.5ms/ 62.9ms | Train: loss=0.000, acc= 79.5% | Valid: loss=0.000, acc= 78.8% | *
+| Epoch  10, time=3141.0ms/ 76.0ms | Train: loss=0.000, acc= 80.5% | Valid: loss=0.000, acc= 80.1% | *
+| Epoch  11, time=3362.6ms/ 75.7ms | Train: loss=0.000, acc= 81.0% | Valid: loss=0.000, acc= 80.6% | *
+| Epoch  12, time=3318.4ms/ 75.9ms | Train: loss=0.000, acc= 79.9% | Valid: loss=0.000, acc= 79.1% |
+| Epoch  13, time=3308.8ms/ 76.0ms | Train: loss=0.000, acc= 81.0% | Valid: loss=0.000, acc= 80.7% | *
+| Epoch  14, time=3315.4ms/ 75.9ms | Train: loss=0.000, acc= 80.5% | Valid: loss=0.000, acc= 79.1% |
+| Epoch  15, time=3336.1ms/ 67.6ms | Train: loss=0.000, acc= 78.8% | Valid: loss=0.000, acc= 77.7% |
+| Epoch  16, time=2710.2ms/ 62.8ms | Train: loss=0.000, acc= 76.7% | Valid: loss=0.000, acc= 74.1% |
+| Epoch  17, time=2634.5ms/ 62.5ms | Train: loss=0.000, acc= 82.7% | Valid: loss=0.000, acc= 79.8% | *
+| Epoch  18, time=2640.6ms/ 63.0ms | Train: loss=0.000, acc= 83.4% | Valid: loss=0.000, acc= 81.8% | *
+| Epoch  19, time=3159.3ms/ 75.5ms | Train: loss=0.000, acc= 83.4% | Valid: loss=0.000, acc= 83.1% | *
+| Epoch  20, time=2830.9ms/ 62.5ms | Train: loss=0.000, acc= 82.0% | Valid: loss=0.000, acc= 80.2% |
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - cifar10-2      : loss=0.000, acc=65.550% <<<
+>>> Test on task  1 - cifar100-3     : loss=0.001, acc=23.050% <<<
+>>> Test on task  2 - cifar10-4      : loss=0.000, acc=71.050% <<<
+>>> Test on task  3 - cifar100-4     : loss=0.001, acc=26.900% <<<
+>>> Test on task  4 - cifar10-1      : loss=0.000, acc=80.250% <<<
+Save at ../checkpoints/cifar_ucb_bcl
+****************************************************************************************************
+Task  5 (cifar100-1)
+****************************************************************************************************
+| Epoch   1, time=2641.1ms/ 62.7ms | Train: loss=0.001, acc= 20.9% | Valid: loss=0.001, acc= 21.5% | *
+| Epoch   2, time=2645.3ms/ 62.5ms | Train: loss=0.001, acc= 25.9% | Valid: loss=0.001, acc= 27.2% | *
+| Epoch   3, time=2637.1ms/ 62.5ms | Train: loss=0.001, acc= 29.4% | Valid: loss=0.001, acc= 28.3% | *
+| Epoch   4, time=2642.2ms/ 62.8ms | Train: loss=0.001, acc= 33.1% | Valid: loss=0.001, acc= 32.7% | *
+| Epoch   5, time=2634.7ms/ 63.0ms | Train: loss=0.001, acc= 35.2% | Valid: loss=0.001, acc= 35.2% | *
+| Epoch   6, time=2641.8ms/ 62.7ms | Train: loss=0.001, acc= 36.7% | Valid: loss=0.001, acc= 37.0% | *
+| Epoch   7, time=2667.5ms/ 64.9ms | Train: loss=0.001, acc= 38.2% | Valid: loss=0.001, acc= 40.0% | *
+| Epoch   8, time=3187.0ms/ 75.7ms | Train: loss=0.001, acc= 40.6% | Valid: loss=0.001, acc= 40.1% | *
+| Epoch   9, time=3300.0ms/ 76.2ms | Train: loss=0.001, acc= 39.9% | Valid: loss=0.001, acc= 38.8% | *
+| Epoch  10, time=3304.5ms/ 76.3ms | Train: loss=0.001, acc= 42.7% | Valid: loss=0.001, acc= 41.5% | *
+| Epoch  11, time=3301.8ms/ 75.6ms | Train: loss=0.001, acc= 42.0% | Valid: loss=0.001, acc= 42.7% | *
+| Epoch  12, time=3288.3ms/ 76.1ms | Train: loss=0.001, acc= 43.2% | Valid: loss=0.001, acc= 42.6% | *
+| Epoch  13, time=3302.9ms/ 82.1ms | Train: loss=0.001, acc= 45.2% | Valid: loss=0.001, acc= 44.3% | *
+| Epoch  14, time=2684.1ms/ 63.5ms | Train: loss=0.001, acc= 45.4% | Valid: loss=0.001, acc= 44.8% | *
+| Epoch  15, time=2663.4ms/ 63.6ms | Train: loss=0.001, acc= 45.3% | Valid: loss=0.001, acc= 44.9% | *
+| Epoch  16, time=3073.7ms/ 66.0ms | Train: loss=0.001, acc= 47.6% | Valid: loss=0.001, acc= 46.0% | *
+| Epoch  17, time=2869.4ms/ 66.0ms | Train: loss=0.001, acc= 47.9% | Valid: loss=0.001, acc= 45.7% | *
+| Epoch  18, time=2797.5ms/ 62.9ms | Train: loss=0.001, acc= 46.6% | Valid: loss=0.001, acc= 46.1% |
+| Epoch  19, time=2784.7ms/ 76.0ms | Train: loss=0.001, acc= 50.5% | Valid: loss=0.001, acc= 48.2% | *
+| Epoch  20, time=3316.6ms/ 65.9ms | Train: loss=0.001, acc= 48.2% | Valid: loss=0.001, acc= 49.9% |
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - cifar10-2      : loss=0.000, acc=55.350% <<<
+>>> Test on task  1 - cifar100-3     : loss=0.001, acc=21.100% <<<
+>>> Test on task  2 - cifar10-4      : loss=0.000, acc=68.100% <<<
+>>> Test on task  3 - cifar100-4     : loss=0.001, acc=24.000% <<<
+>>> Test on task  4 - cifar10-1      : loss=0.000, acc=68.200% <<<
+>>> Test on task  5 - cifar100-1     : loss=0.001, acc=48.850% <<<
+Save at ../checkpoints/cifar_ucb_bcl
+****************************************************************************************************
+Task  6 (cifar100-2)
+****************************************************************************************************
+| Epoch   1, time=2888.8ms/ 69.2ms | Train: loss=0.001, acc= 28.8% | Valid: loss=0.001, acc= 26.3% | *
+| Epoch   2, time=3264.5ms/ 82.9ms | Train: loss=0.001, acc= 32.5% | Valid: loss=0.001, acc= 29.7% | *
+| Epoch   3, time=3667.8ms/ 82.1ms | Train: loss=0.001, acc= 32.7% | Valid: loss=0.001, acc= 29.7% | *
+| Epoch   4, time=3658.0ms/ 82.6ms | Train: loss=0.001, acc= 38.1% | Valid: loss=0.001, acc= 35.5% | *
+| Epoch   5, time=3567.5ms/ 72.9ms | Train: loss=0.001, acc= 39.3% | Valid: loss=0.001, acc= 34.7% | *
+| Epoch   6, time=3627.3ms/ 73.0ms | Train: loss=0.001, acc= 41.1% | Valid: loss=0.001, acc= 37.4% | *
+| Epoch   7, time=3170.2ms/ 72.8ms | Train: loss=0.001, acc= 41.8% | Valid: loss=0.001, acc= 38.2% | *
+| Epoch   8, time=3249.6ms/ 72.3ms | Train: loss=0.001, acc= 42.1% | Valid: loss=0.001, acc= 37.9% | *
+| Epoch   9, time=3188.3ms/ 72.9ms | Train: loss=0.001, acc= 44.5% | Valid: loss=0.001, acc= 40.1% | *
+| Epoch  10, time=3128.6ms/ 72.1ms | Train: loss=0.001, acc= 46.4% | Valid: loss=0.001, acc= 42.6% | *
+| Epoch  11, time=3318.7ms/ 86.3ms | Train: loss=0.001, acc= 47.4% | Valid: loss=0.001, acc= 44.9% | *
+| Epoch  12, time=3595.2ms/ 82.2ms | Train: loss=0.001, acc= 46.1% | Valid: loss=0.001, acc= 41.1% |
+| Epoch  13, time=3401.2ms/ 72.1ms | Train: loss=0.001, acc= 48.7% | Valid: loss=0.001, acc= 44.5% | *
+| Epoch  14, time=3289.3ms/ 82.3ms | Train: loss=0.001, acc= 48.3% | Valid: loss=0.001, acc= 44.9% | *
+| Epoch  15, time=3618.6ms/ 72.8ms | Train: loss=0.001, acc= 46.5% | Valid: loss=0.001, acc= 43.1% |
+| Epoch  16, time=3125.5ms/ 71.9ms | Train: loss=0.000, acc= 51.0% | Valid: loss=0.001, acc= 45.1% | *
+| Epoch  17, time=3119.6ms/ 71.9ms | Train: loss=0.000, acc= 49.3% | Valid: loss=0.001, acc= 45.4% |
+| Epoch  18, time=3155.3ms/ 74.6ms | Train: loss=0.000, acc= 50.3% | Valid: loss=0.001, acc= 45.6% |
+| Epoch  19, time=3760.1ms/ 82.8ms | Train: loss=0.000, acc= 50.7% | Valid: loss=0.001, acc= 46.3% |
+| Epoch  20, time=3130.8ms/ 71.8ms | Train: loss=0.000, acc= 52.4% | Valid: loss=0.001, acc= 48.1% | *
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - cifar10-2      : loss=0.000, acc=55.550% <<<
+>>> Test on task  1 - cifar100-3     : loss=0.001, acc=14.350% <<<
+>>> Test on task  2 - cifar10-4      : loss=0.000, acc=57.150% <<<
+>>> Test on task  3 - cifar100-4     : loss=0.001, acc=13.550% <<<
+>>> Test on task  4 - cifar10-1      : loss=0.000, acc=58.050% <<<
+>>> Test on task  5 - cifar100-1     : loss=0.001, acc=30.450% <<<
+>>> Test on task  6 - cifar100-2     : loss=0.001, acc=47.200% <<<
+Save at ../checkpoints/cifar_ucb_bcl
+****************************************************************************************************
+Task  7 (cifar10-3)
+****************************************************************************************************
+| Epoch   1, time=3196.9ms/ 83.3ms | Train: loss=0.000, acc= 83.4% | Valid: loss=0.000, acc= 82.9% | *
+| Epoch   2, time=3685.4ms/ 82.9ms | Train: loss=0.000, acc= 88.4% | Valid: loss=0.000, acc= 87.4% | *
+| Epoch   3, time=3740.3ms/ 84.1ms | Train: loss=0.000, acc= 90.8% | Valid: loss=0.000, acc= 89.9% | *
+| Epoch   4, time=3474.3ms/ 72.4ms | Train: loss=0.000, acc= 91.7% | Valid: loss=0.000, acc= 90.2% | *
+| Epoch   5, time=3631.2ms/ 82.9ms | Train: loss=0.000, acc= 89.4% | Valid: loss=0.000, acc= 88.4% |
+| Epoch   6, time=3799.3ms/ 71.8ms | Train: loss=0.000, acc= 90.9% | Valid: loss=0.000, acc= 89.4% |
+| Epoch   7, time=3074.7ms/ 70.3ms | Train: loss=0.000, acc= 93.5% | Valid: loss=0.000, acc= 91.9% | *
+| Epoch   8, time=3032.6ms/ 71.1ms | Train: loss=0.000, acc= 93.4% | Valid: loss=0.000, acc= 93.3% | *
+| Epoch   9, time=3089.8ms/ 70.8ms | Train: loss=0.000, acc= 92.2% | Valid: loss=0.000, acc= 92.5% |
+| Epoch  10, time=3254.0ms/ 77.1ms | Train: loss=0.000, acc= 94.2% | Valid: loss=0.000, acc= 92.7% |
+| Epoch  11, time=3274.6ms/ 65.5ms | Train: loss=0.000, acc= 94.6% | Valid: loss=0.000, acc= 94.1% | *
+| Epoch  12, time=2830.6ms/ 65.5ms | Train: loss=0.000, acc= 94.7% | Valid: loss=0.000, acc= 93.9% | *
+| Epoch  13, time=3050.5ms/ 66.2ms | Train: loss=0.000, acc= 94.3% | Valid: loss=0.000, acc= 93.9% |
+| Epoch  14, time=3052.5ms/ 65.4ms | Train: loss=0.000, acc= 94.9% | Valid: loss=0.000, acc= 93.6% |
+| Epoch  15, time=2827.8ms/ 65.5ms | Train: loss=0.000, acc= 95.1% | Valid: loss=0.000, acc= 94.5% | *
+| Epoch  16, time=2884.7ms/ 65.4ms | Train: loss=0.000, acc= 95.5% | Valid: loss=0.000, acc= 95.0% | *
+| Epoch  17, time=2816.3ms/ 65.4ms | Train: loss=0.000, acc= 94.8% | Valid: loss=0.000, acc= 94.5% |
+| Epoch  18, time=2823.2ms/ 65.5ms | Train: loss=0.000, acc= 95.5% | Valid: loss=0.000, acc= 95.0% |
+| Epoch  19, time=2825.7ms/ 65.7ms | Train: loss=0.000, acc= 95.7% | Valid: loss=0.000, acc= 94.3% |
+| Epoch  20, time=2818.0ms/ 62.6ms | Train: loss=0.000, acc= 95.6% | Valid: loss=0.000, acc= 94.0% |
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - cifar10-2      : loss=0.000, acc=46.850% <<<
+>>> Test on task  1 - cifar100-3     : loss=0.001, acc=14.100% <<<
+>>> Test on task  2 - cifar10-4      : loss=0.000, acc=51.400% <<<
+>>> Test on task  3 - cifar100-4     : loss=0.001, acc=13.300% <<<
+>>> Test on task  4 - cifar10-1      : loss=0.000, acc=62.900% <<<
+>>> Test on task  5 - cifar100-1     : loss=0.001, acc=22.850% <<<
+>>> Test on task  6 - cifar100-2     : loss=0.001, acc=32.800% <<<
+>>> Test on task  7 - cifar10-3      : loss=0.000, acc=94.250% <<<
+Save at ../checkpoints/cifar_ucb_bcl
+****************************************************************************************************
+Task  8 (cifar10-0)
+****************************************************************************************************
+| Epoch   1, time=2328.0ms/ 73.6ms | Train: loss=0.000, acc= 86.5% | Valid: loss=0.000, acc= 87.6% | *
+| Epoch   2, time=2439.2ms/ 72.7ms | Train: loss=0.000, acc= 88.0% | Valid: loss=0.000, acc= 88.7% | *
+| Epoch   3, time=2450.8ms/ 74.7ms | Train: loss=0.000, acc= 88.7% | Valid: loss=0.000, acc= 89.1% | *
+| Epoch   4, time=2467.3ms/ 73.4ms | Train: loss=0.000, acc= 90.2% | Valid: loss=0.000, acc= 91.2% | *
+| Epoch   5, time=2463.5ms/ 71.8ms | Train: loss=0.000, acc= 90.9% | Valid: loss=0.000, acc= 91.4% | *
+| Epoch   6, time=2451.0ms/ 73.6ms | Train: loss=0.000, acc= 89.6% | Valid: loss=0.000, acc= 89.9% |
+| Epoch   7, time=2494.0ms/ 73.5ms | Train: loss=0.000, acc= 91.8% | Valid: loss=0.000, acc= 92.7% | *
+| Epoch   8, time=2685.6ms/ 75.8ms | Train: loss=0.000, acc= 92.1% | Valid: loss=0.000, acc= 92.1% |
+| Epoch   9, time=2419.6ms/ 67.4ms | Train: loss=0.000, acc= 92.9% | Valid: loss=0.000, acc= 92.9% | *
+| Epoch  10, time=2337.1ms/ 69.0ms | Train: loss=0.000, acc= 93.2% | Valid: loss=0.000, acc= 93.2% | *
+| Epoch  11, time=2356.9ms/ 67.5ms | Train: loss=0.000, acc= 92.0% | Valid: loss=0.000, acc= 92.1% |
+| Epoch  12, time=2276.6ms/ 66.2ms | Train: loss=0.000, acc= 93.5% | Valid: loss=0.000, acc= 92.9% |
+| Epoch  13, time=2299.8ms/ 67.2ms | Train: loss=0.000, acc= 94.0% | Valid: loss=0.000, acc= 93.9% | *
+| Epoch  14, time=2365.6ms/ 67.2ms | Train: loss=0.000, acc= 93.8% | Valid: loss=0.000, acc= 93.4% | *
+| Epoch  15, time=2385.9ms/ 67.0ms | Train: loss=0.000, acc= 94.2% | Valid: loss=0.000, acc= 93.5% | *
+| Epoch  16, time=2391.9ms/ 68.4ms | Train: loss=0.000, acc= 94.4% | Valid: loss=0.000, acc= 93.6% |
+| Epoch  17, time=2343.0ms/ 71.2ms | Train: loss=0.000, acc= 94.0% | Valid: loss=0.000, acc= 93.7% |
+| Epoch  18, time=2356.7ms/ 69.8ms | Train: loss=0.000, acc= 94.7% | Valid: loss=0.000, acc= 93.9% |
+| Epoch  19, time=2716.0ms/ 72.2ms | Train: loss=0.000, acc= 93.1% | Valid: loss=0.000, acc= 92.8% |
+| Epoch  20, time=2466.6ms/ 72.0ms | Train: loss=0.000, acc= 92.9% | Valid: loss=0.000, acc= 92.7% | lr=3.3e-03
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - cifar10-2      : loss=0.000, acc=45.050% <<<
+>>> Test on task  1 - cifar100-3     : loss=0.001, acc=13.250% <<<
+>>> Test on task  2 - cifar10-4      : loss=0.000, acc=50.100% <<<
+>>> Test on task  3 - cifar100-4     : loss=0.001, acc=11.500% <<<
+>>> Test on task  4 - cifar10-1      : loss=0.000, acc=60.600% <<<
+>>> Test on task  5 - cifar100-1     : loss=0.001, acc=19.200% <<<
+>>> Test on task  6 - cifar100-2     : loss=0.001, acc=29.650% <<<
+>>> Test on task  7 - cifar10-3      : loss=0.000, acc=90.500% <<<
+>>> Test on task  8 - cifar10-0      : loss=0.000, acc=93.350% <<<
+Save at ../checkpoints/cifar_ucb_bcl
+****************************************************************************************************
+Task  9 (cifar100-0)
+****************************************************************************************************
+| Epoch   1, time=3070.5ms/ 71.9ms | Train: loss=0.001, acc= 24.1% | Valid: loss=0.001, acc= 21.8% | *
+| Epoch   2, time=3039.1ms/ 71.3ms | Train: loss=0.001, acc= 28.1% | Valid: loss=0.001, acc= 25.7% | *
+| Epoch   3, time=3009.2ms/ 71.5ms | Train: loss=0.001, acc= 34.9% | Valid: loss=0.001, acc= 31.5% | *
+| Epoch   4, time=3075.9ms/ 75.0ms | Train: loss=0.001, acc= 35.6% | Valid: loss=0.001, acc= 33.8% | *
+| Epoch   5, time=3060.0ms/ 74.9ms | Train: loss=0.001, acc= 38.4% | Valid: loss=0.001, acc= 37.5% | *
+| Epoch   6, time=3117.5ms/ 74.5ms | Train: loss=0.001, acc= 38.8% | Valid: loss=0.001, acc= 36.7% | *
+| Epoch   7, time=3256.5ms/ 71.8ms | Train: loss=0.001, acc= 42.6% | Valid: loss=0.001, acc= 40.1% | *
+| Epoch   8, time=2960.1ms/ 67.2ms | Train: loss=0.001, acc= 41.6% | Valid: loss=0.001, acc= 39.4% |
+| Epoch   9, time=2803.9ms/ 69.0ms | Train: loss=0.001, acc= 43.3% | Valid: loss=0.001, acc= 41.4% |
+| Epoch  10, time=2900.8ms/ 70.5ms | Train: loss=0.001, acc= 45.3% | Valid: loss=0.001, acc= 42.1% | *
+| Epoch  11, time=2922.9ms/ 72.2ms | Train: loss=0.001, acc= 46.4% | Valid: loss=0.001, acc= 43.1% | *
+| Epoch  12, time=2935.4ms/ 66.1ms | Train: loss=0.001, acc= 46.2% | Valid: loss=0.001, acc= 43.1% | *
+| Epoch  13, time=2887.0ms/ 73.7ms | Train: loss=0.001, acc= 48.2% | Valid: loss=0.001, acc= 45.0% | *
+| Epoch  14, time=3019.4ms/ 73.1ms | Train: loss=0.001, acc= 48.0% | Valid: loss=0.001, acc= 45.7% |
+| Epoch  15, time=3183.8ms/ 73.9ms | Train: loss=0.001, acc= 49.7% | Valid: loss=0.001, acc= 45.9% | *
+| Epoch  16, time=3136.2ms/ 76.3ms | Train: loss=0.001, acc= 49.2% | Valid: loss=0.001, acc= 46.8% |
+| Epoch  17, time=3095.3ms/ 75.3ms | Train: loss=0.001, acc= 49.7% | Valid: loss=0.001, acc= 46.6% |
+| Epoch  18, time=3058.7ms/ 73.2ms | Train: loss=0.001, acc= 48.0% | Valid: loss=0.001, acc= 45.1% |
+| Epoch  19, time=3045.3ms/ 71.1ms | Train: loss=0.000, acc= 51.7% | Valid: loss=0.001, acc= 47.4% | *
+| Epoch  20, time=2945.3ms/ 71.5ms | Train: loss=0.000, acc= 52.0% | Valid: loss=0.001, acc= 48.8% |
+----------------------------------------------------------------------------------------------------
+>>> Test on task  0 - cifar10-2      : loss=0.000, acc=52.250% <<<
+>>> Test on task  1 - cifar100-3     : loss=0.001, acc=15.200% <<<
+>>> Test on task  2 - cifar10-4      : loss=0.000, acc=56.000% <<<
+>>> Test on task  3 - cifar100-4     : loss=0.001, acc=14.150% <<<
+>>> Test on task  4 - cifar10-1      : loss=0.000, acc=60.950% <<<
+>>> Test on task  5 - cifar100-1     : loss=0.001, acc=26.800% <<<
+>>> Test on task  6 - cifar100-2     : loss=0.001, acc=32.300% <<<
+>>> Test on task  7 - cifar10-3      : loss=0.000, acc=88.800% <<<
+>>> Test on task  8 - cifar10-0      : loss=0.000, acc=86.150% <<<
+>>> Test on task  9 - cifar100-0     : loss=0.001, acc=50.200% <<<
+Save at ../checkpoints/cifar_ucb_bcl
+****************************************************************************************************
+Accuracies =
+	,0.8270% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.5660% ,0.3540% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.4980% ,0.1530% ,0.9100% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.5810% ,0.1730% ,0.5655% ,0.3880% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.6555% ,0.2305% ,0.7105% ,0.2690% ,0.8025% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.5535% ,0.2110% ,0.6810% ,0.2400% ,0.6820% ,0.4885% ,0.0000% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.5555% ,0.1435% ,0.5715% ,0.1355% ,0.5805% ,0.3045% ,0.4720% ,0.0000% ,0.0000% ,0.0000% ,
+	,0.4685% ,0.1410% ,0.5140% ,0.1330% ,0.6290% ,0.2285% ,0.3280% ,0.9425% ,0.0000% ,0.0000% ,
+	,0.4505% ,0.1325% ,0.5010% ,0.1150% ,0.6060% ,0.1920% ,0.2965% ,0.9050% ,0.9335% ,0.0000% ,
+	,0.5225% ,0.1520% ,0.5600% ,0.1415% ,0.6095% ,0.2680% ,0.3230% ,0.8880% ,0.8615% ,0.5020% ,
+ACC: 0.4828%
+
+
+BWT :  0.34%
+****************************************************************************************************
+Done!
+Log file saved in  ../checkpoints/cifar_ucb_bcl/cifar_ucb_bcl_seed_0.p
+[Elapsed time = 4.4 h]
