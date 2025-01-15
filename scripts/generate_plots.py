@@ -14,7 +14,7 @@ def generate_plot(experiment_name, skip_approaches):
     plots_per_row = 5
     rows = num_tasks // plots_per_row if num_tasks > plots_per_row else 1
 
-    fig, axes = plt.subplots(rows, plots_per_row, figsize=(15, 5 * rows), squeeze=False)
+    fig, axes = plt.subplots(rows, plots_per_row, figsize=(14, 2.75 * rows), squeeze=False)
 
     line_styles = ['-', '--', '-.', 'dotted']
     markers = ['o', 'D', '.', '*']
@@ -49,7 +49,7 @@ def generate_plot(experiment_name, skip_approaches):
     handles, labels = axes[0, 0].get_legend_handles_labels()
     fig.legend(handles, labels, loc='upper center', ncol=data_dict['M'])
     
-    plt.tight_layout(h_pad=0, w_pad=1, rect=[0, 0, 1, 0.95])
+    plt.tight_layout(h_pad=0.5, w_pad=1, rect=[0, 0, 1, 0.95])
     plt.subplots_adjust(bottom=0.1)
     plot_name = f'plots/{experiment_name}.pdf'
     if len(skip_approaches):

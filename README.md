@@ -1,3 +1,5 @@
+# Bayesian Neural Networks with Experience Replay for Continual Learning
+
 ## Prerequisites:
 - Linux-64
 - Conda
